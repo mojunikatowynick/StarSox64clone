@@ -1,0 +1,117 @@
+[gd_scene load_steps=11 format=3 uid="uid://cpqopqy873vp4"]
+
+[ext_resource type="Script" path="res://scenes/fox.gd" id="1_lncvu"]
+[ext_resource type="PackedScene" uid="uid://wq4d6kqarmf8" path="res://Graphics/Ships/Fox1.blend" id="1_ngsl1"]
+[ext_resource type="Texture2D" uid="uid://d0gs3aiss1h8v" path="res://Graphics/2dSprites/crosshair131.png" id="3_u48rh"]
+[ext_resource type="Texture2D" uid="uid://c5s4s22fs7kyy" path="res://Graphics/2dSprites/crosshair125.png" id="4_6nhxf"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_1nlck"]
+points = PackedVector3Array(-2.64286, -0.720055, 1.30413, 2.35632, -0.0681591, 6.95538, 1.05172, -0.0681591, 6.95538, -2.63422, 0.41665, 1.04451, 0.901974, -0.525126, 1.10899, 0.941242, 0.184765, 0.995504, 0.182639, -0.502615, 6.95538, 2.13856, -0.502615, 4.99824, 0.61718, -0.720055, 1.52153, 2.35632, -0.0681591, 3.69607, -1.55552, -0.720055, 3.69607, -0.468683, 0.366722, 1.52153, -0.0346317, -0.285281, 6.73798, 1.26948, -0.502615, 6.95538, 1.70402, 0.149175, 3.26127, -1.99007, 0.366722, 2.17373, 1.92129, -0.502615, 3.04387, -2.64286, -0.502615, 1.52153, 2.35632, -0.285281, 6.95538, -0.0346317, -0.0681591, 6.30318, 2.13856, -0.502615, 6.08523, -1.12049, -0.720055, 3.91291, 2.35632, -0.285281, 3.69607, 0.61718, -0.720055, 1.30413, -1.55552, -0.285281, 3.69607, 1.70402, 0.149175, 2.60852, -1.55552, 0.366722, 2.17373, -0.468683, 0.366722, 1.30413, -0.0346317, -0.502615, 6.73798, -0.0346317, -0.720055, 2.60852, 0.182639, -0.0681591, 6.52058, 0.182639, -0.285281, 6.95538)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_8v73h"]
+points = PackedVector3Array(-0.902373, -1.58918, -0.434456, -3.51158, 1.4532, 0.434456, -3.51158, 1.4532, -0.434456, 3.87781, 0.149111, 0.217228, -2.44968, -0.651852, 1.1678, 1.05178, 0.366509, -1.30388, -5.46848, -0.719885, -0.217228, 3.87781, -0.936986, 0.217228, 1.05178, 0.366509, 1.30388, -2.44968, -0.651852, -1.1678, -3.51158, -1.58918, 0.434456, -5.46848, 0.583908, 0.217228, -2.20697, 0.583908, 1.30388, -2.20697, 0.583908, -1.30388, 3.22551, -0.936986, -0.434456, -3.51158, -1.58918, -0.434456, 3.22551, 0.366509, -0.434456, 0.834046, -1.37178, 0.434456, -1.33785, 1.2358, 0.434456, -5.46848, 0.583908, -0.217228, -5.46848, -0.719885, 0.217228, 0.964945, -0.438396, 1.11155, 0.964945, -0.438396, -1.11155, -1.33785, 1.2358, -0.434456, 3.22551, 0.366509, 0.434456, -0.902373, -1.58918, 0.434456, 3.87781, -0.936986, -0.217228, -3.94614, 1.4532, 0.434456, -3.94614, 1.4532, -0.434456, 1.92091, 0.366509, 1.08639, 1.92091, 0.366509, -1.08639, 3.87781, 0.149111, -0.217228)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_w4y5q"]
+points = PackedVector3Array(-1.55552, -0.285281, -3.69607, 2.35632, -0.0681591, -3.69607, 2.13856, -0.0681591, -3.26127, -2.63422, 0.41665, -1.04451, 0.61718, -0.720055, -1.30413, 1.05172, -0.0681591, -6.95538, -2.64286, -0.720055, -1.52153, 1.26948, -0.502615, -6.95538, 0.941242, 0.184765, -0.995504, -0.0346317, -0.285281, -6.73798, 2.35632, -0.0681591, -6.95538, 2.13856, -0.502615, -4.99824, -1.33777, -0.720055, -3.91291, -0.468683, 0.366722, -1.52153, 0.901974, -0.525126, -1.10899, 1.70402, 0.149175, -3.26127, -1.99007, 0.366722, -2.17373, -2.64286, -0.720055, -1.30413, 1.92129, -0.502615, -3.04387, 0.182639, -0.502615, -6.95538, 2.13856, -0.502615, -6.08523, -0.0346317, -0.0681591, -6.30318, 2.35632, -0.285281, -3.69607, 2.35632, -0.285281, -6.95538, -0.685954, -0.720055, -3.47811, -0.0346317, -0.502615, -6.73798, 1.70402, 0.149175, -2.60852, -1.55552, 0.366722, -2.17373, -2.64286, -0.502615, -1.52153, -0.468683, 0.366722, -1.30413, 0.399909, -0.720055, -1.95633, 0.182639, -0.0681591, -6.52058)
+
+[sub_resource type="Animation" id="Animation_hkr4q"]
+resource_name = "BarrelRoll"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.566667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 6.28319)]
+}
+
+[sub_resource type="Animation" id="Animation_j8mfq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Fox1/Cube:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 1.5708, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xolce"]
+_data = {
+"BarrelRoll": SubResource("Animation_hkr4q"),
+"RESET": SubResource("Animation_j8mfq")
+}
+
+[node name="Fox" type="CharacterBody3D"]
+motion_mode = 1
+slide_on_ceiling = false
+script = ExtResource("1_lncvu")
+
+[node name="Fox1" parent="." instance=ExtResource("1_ngsl1")]
+
+[node name="Cube" parent="Fox1" index="0"]
+transform = Transform3D(-3.61999e-06, 0, 1, 0, 1, 0, -1, 0, -3.61999e-06, 0, 0, 0)
+
+[node name="ColLeftWing" type="CollisionShape3D" parent="."]
+transform = Transform3D(1.75236e-07, 0, 0.9, 0, 0.9, 0, -0.9, 0, 1.75236e-07, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_1nlck")
+
+[node name="ColCabin" type="CollisionShape3D" parent="."]
+transform = Transform3D(1.75236e-07, 0, 0.9, 0, 0.9, 0, -0.9, 0, 1.75236e-07, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_8v73h")
+
+[node name="ColRightWing" type="CollisionShape3D" parent="."]
+transform = Transform3D(1.55766e-07, 0, 0.8, 0, 0.8, 0, -0.8, 0, 1.55766e-07, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_w4y5q")
+
+[node name="Timer" type="Node" parent="."]
+
+[node name="CanBarrelTimer" type="Timer" parent="Timer"]
+wait_time = 3.0
+one_shot = true
+
+[node name="Animation" type="Node" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Animation"]
+libraries = {
+"": SubResource("AnimationLibrary_xolce")
+}
+
+[node name="WeaponHandler" type="Node3D" parent="."]
+
+[node name="BarrelEnd" type="Marker3D" parent="WeaponHandler"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
+
+[node name="Sprite3D" type="Sprite3D" parent="WeaponHandler"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, -10)
+texture = ExtResource("3_u48rh")
+
+[node name="Crosshair" type="Sprite3D" parent="WeaponHandler"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, -25)
+texture = ExtResource("4_6nhxf")
+
+[connection signal="timeout" from="Timer/CanBarrelTimer" to="." method="_on_can_barrel_timer_timeout"]
+[connection signal="animation_finished" from="Animation/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+
+[editable path="Fox1"]

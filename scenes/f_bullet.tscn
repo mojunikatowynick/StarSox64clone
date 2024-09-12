@@ -1,0 +1,73 @@
+[gd_scene load_steps=7 format=3 uid="uid://cbupiofkpbv50"]
+
+[ext_resource type="Script" path="res://scenes/f_bullet.gd" id="1_o1o7r"]
+[ext_resource type="PackedScene" uid="uid://clo5tcd4e74y2" path="res://Graphics/Projectiles/Fbullet.blend" id="1_yu7g3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0mbbk"]
+albedo_color = Color(0.960784, 0, 0.0431373, 1)
+emission_enabled = true
+emission = Color(0.665294, 0, 0.0202511, 1)
+emission_energy_multiplier = 20.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_d2s41"]
+radius = 1.0
+height = 5.738
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5ccpc"]
+albedo_color = Color(0.697003, 0.148781, 0, 1)
+emission_enabled = true
+emission = Color(0.887424, 0.270994, 0.400456, 1)
+emission_energy_multiplier = 6.84
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_6apvo"]
+material = SubResource("StandardMaterial3D_5ccpc")
+top_radius = 0.0
+bottom_radius = 0.1
+height = 0.4
+radial_segments = 4
+
+[node name="FBullet" type="Area3D"]
+script = ExtResource("1_o1o7r")
+
+[node name="Fbullet" parent="." instance=ExtResource("1_yu7g3")]
+
+[node name="Cylinder" parent="Fbullet" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_0mbbk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.86, 0, 0, 0, -3.75918e-08, -0.86, 0, 0.86, -3.75918e-08, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_d2s41")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00902814, 1.48877)
+visible = false
+light_color = Color(0.998586, 0.398404, 0.338031, 1)
+light_energy = 2.0
+light_size = 7.307
+shadow_enabled = true
+
+[node name="Timer" type="Node" parent="."]
+
+[node name="LifeTimer" type="Timer" parent="Timer"]
+wait_time = 5.0
+one_shot = true
+
+[node name="Particles" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65789, 0)
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="Particles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.640178, 0.78365)
+emitting = false
+amount = 15
+lifetime = 0.1
+one_shot = true
+mesh = SubResource("CylinderMesh_6apvo")
+particle_flag_align_y = true
+direction = Vector3(0, 0, 0)
+gravity = Vector3(0, 0, 0)
+initial_velocity_max = 30.3
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer/LifeTimer" to="." method="_on_life_timer_timeout"]
+
+[editable path="Fbullet"]
