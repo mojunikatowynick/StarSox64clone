@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://bodqnqhpfxq40"]
+[gd_scene load_steps=3 format=3 uid="uid://bodqnqhpfxq40"]
+
+[ext_resource type="Script" path="res://scenes/Levels/level_1.gd" id="1_rx1fv"]
 
 [sub_resource type="Curve3D" id="Curve3D_6q10b"]
+bake_interval = 512.0
 _data = {
 "points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0.704703, 0.141301, 0.209516, 0, 0, 0, 0, 0, 0, 77, 20, 98, 0, 0, 0, 0, 0, 0, -14, 90, 45, 0, 0, 0, 0, 0, 0, -241.416, 136.706, -35.1735, 0, 0, 0, 0, 0, 0, -266.913, -8.41931, -160.833, 0, 0, 0, 0, 0, 0, -125.028, -30.8266, -100.515, 0, 0, 0, 0, 0, 0, 0.132448, -0.093541, -0.0611277, 0, 0, 0, 0, 0, 0, 0.704703, 0.141301, 0.209516),
 "tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0)
@@ -8,9 +11,12 @@ _data = {
 point_count = 8
 
 [node name="Level1" type="Node3D"]
+script = ExtResource("1_rx1fv")
 
 [node name="Path3D" type="Path3D" parent="."]
 curve = SubResource("Curve3D_6q10b")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
-transform = Transform3D(-0.788426, -0.0972481, -0.607387, 3.72528e-09, 0.987417, -0.158095, 0.615123, -0.124646, -0.77851, 0.704703, 0.141301, 0.209516)
+transform = Transform3D(0.788426, -0.0972489, 0.60739, 0, 0.987425, 0.158096, -0.615123, -0.124647, 0.778514, 0.704703, 0.141301, 0.209516)
+rotation_mode = 4
+use_model_front = true

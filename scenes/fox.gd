@@ -32,7 +32,7 @@ func _ready():
 	colliders = [col_left_wing, col_cabin, col_right_wing]
 	
 func _physics_process(delta: float) -> void:
-	print(col_left_wing.disabled)
+	#print(col_left_wing.disabled)
 	#basic movement
 	if !barrel:
 		var input_dir := Input.get_vector("left", "right", "down", "up")

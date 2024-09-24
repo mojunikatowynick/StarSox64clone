@@ -4,7 +4,7 @@ extends Node
 #projectiles
 const F_BULLET = preload("res://scenes/f_bullet.tscn")
 
-@onready var fox = $RailCart/Fox
+@onready var fox = $Level1/Path3D/PathFollow3D/RailCart/Fox
 @onready var bullets = $Bullets
 @onready var world_environment = $WorldEnvironment
 

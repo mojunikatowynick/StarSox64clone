@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bhyhsvivo3vqy"]
+[gd_scene load_steps=9 format=3 uid="uid://bhyhsvivo3vqy"]
 
 [ext_resource type="PackedScene" uid="uid://cpqopqy873vp4" path="res://scenes/fox.tscn" id="1_t2hor"]
 [ext_resource type="Script" path="res://scenes/world.gd" id="1_y0ffe"]
@@ -24,6 +24,18 @@ background_color = Color(0.66704, 0.730931, 0.858291, 1)
 sky = SubResource("Sky_dun7p")
 ambient_light_source = 3
 
+[sub_resource type="GDScript" id="GDScript_250gr"]
+script/source = "extends PathFollow3D
+
+
+var prog_speed = 100
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	progress += 100 * delta
+	print(progress)
+"
+
 [node name="World" type="Node"]
 script = ExtResource("1_y0ffe")
 
@@ -43,22 +55,25 @@ texture = ExtResource("3_sr83k")
 
 [node name="Bullets" type="Node3D" parent="."]
 
-[node name="RailCart" type="Node3D" parent="."]
-
-[node name="Fox" parent="RailCart" instance=ExtResource("1_t2hor")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.93837, 0, 0)
-
-[node name="CameraHolder" type="Node3D" parent="RailCart"]
-
-[node name="Camera3D" type="Camera3D" parent="RailCart/CameraHolder"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 50)
-
 [node name="Level1" parent="." instance=ExtResource("4_ukp2y")]
 
 [node name="PathFollow3D" parent="Level1/Path3D" index="0"]
-transform = Transform3D(-0.788429, -0.0972491, -0.60739, 0, 0.987427, -0.158096, 0.615126, -0.124648, -0.778514, 0.704703, 0.141301, 0.209516)
-rotation_mode = 4
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.704703, 0.141301, 0.209516)
+rotation_mode = 0
+use_model_front = true
+script = SubResource("GDScript_250gr")
 
-[connection signal="fire" from="RailCart/Fox" to="." method="_on_fox_fire"]
+[node name="RailCart" type="Node3D" parent="Level1/Path3D/PathFollow3D" index="0"]
+transform = Transform3D(-0.788429, 0, 0.615126, -0.0972485, 0.987421, -0.124647, -0.607389, -0.158096, -0.778513, 0.42673, -0.0448767, 0.613479)
+
+[node name="Fox" parent="Level1/Path3D/PathFollow3D/RailCart" instance=ExtResource("1_t2hor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.93837, 0, 0)
+
+[node name="CameraHolder" type="Node3D" parent="Level1/Path3D/PathFollow3D/RailCart"]
+
+[node name="Camera3D" type="Camera3D" parent="Level1/Path3D/PathFollow3D/RailCart/CameraHolder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 50)
+
+[connection signal="fire" from="Level1/Path3D/PathFollow3D/RailCart/Fox" to="." method="_on_fox_fire"]
 
 [editable path="Level1"]
