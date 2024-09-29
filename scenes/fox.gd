@@ -35,7 +35,7 @@ func _physics_process(delta: float) -> void:
 	#print(col_left_wing.disabled)
 	#basic movement
 	if !barrel:
-		var input_dir := Input.get_vector("left", "right", "down", "up")
+		var input_dir := Input.get_vector( "right", "left", "down", "up" )
 		var direction = (transform.basis * Vector3(input_dir.x, input_dir.y, 0)).normalized()
 		current_speed_x = clamp(current_speed_x, -2, 2)
 		current_speed_y = clamp(current_speed_y, -2, 2)
@@ -51,9 +51,9 @@ func _physics_process(delta: float) -> void:
 		velocity.x = current_speed_x * MAXSPEED
 		velocity.y = current_speed_y * MAXSPEED
 
-		rotation_degrees.x = velocity.y / 1.5
-		fox_1.rotation_degrees.z = -velocity.x * 1.5 
-		rotation_degrees.y = -velocity.x / 1.5
+		rotation_degrees.x = -velocity.y / 1.5
+		fox_1.rotation_degrees.x = -velocity.x * 1.5 
+		rotation_degrees.y = velocity.x / 1.5
 		
 	move_and_slide()
 	# animation of movement
@@ -63,7 +63,7 @@ func _physics_process(delta: float) -> void:
 	transform.origin.y = clamp(transform.origin.y, -35, 35)
 	
 	#barrelroll
-	if Input.is_action_pressed("leftbarrel") and can_barrel:
+	if Input.is_action_pressed("rightbarrel") and can_barrel:
 		barrel = true
 		velocity.x = -3000 * delta
 		animation_player.play("BarrelRoll")
@@ -74,7 +74,7 @@ func _physics_process(delta: float) -> void:
 		velocity.x = 0
 		collision_check()
 
-	if Input.is_action_just_pressed("rightbarrel") and can_barrel:
+	if Input.is_action_just_pressed("leftbarrel") and can_barrel:
 		barrel = true
 		velocity.x = 3000 * delta
 		animation_player.play_backwards("BarrelRoll")

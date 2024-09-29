@@ -8,7 +8,6 @@ const F_BULLET = preload("res://scenes/f_bullet.tscn")
 @onready var bullets = $Bullets
 @onready var world_environment = $WorldEnvironment
 
-
 func _on_fox_fire(pos, rot):
 	var projectile = F_BULLET.instantiate() as Area3D
 	projectile.position = pos

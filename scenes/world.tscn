@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=3 uid="uid://bhyhsvivo3vqy"]
 
-[ext_resource type="PackedScene" uid="uid://cpqopqy873vp4" path="res://scenes/fox.tscn" id="1_t2hor"]
 [ext_resource type="Script" path="res://scenes/world.gd" id="1_y0ffe"]
 [ext_resource type="Texture2D" uid="uid://dvukf8pohr2dr" path="res://icon.svg" id="3_sr83k"]
+[ext_resource type="PackedScene" uid="uid://hrpd64vfq587" path="res://scenes/rail_cart.tscn" id="4_ug5u6"]
 [ext_resource type="PackedScene" uid="uid://bodqnqhpfxq40" path="res://scenes/Levels/level_1.tscn" id="4_ukp2y"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_dqywx"]
@@ -50,30 +50,23 @@ light_energy = 2.0
 [node name="PLACEHOLDERS!" type="Node3D" parent="."]
 
 [node name="Sprite3D" type="Sprite3D" parent="PLACEHOLDERS!"]
-transform = Transform3D(5000, 0, 0, 0, -0.000218557, -5000, 0, 5000, -0.000218557, 0, -40, 0)
+transform = Transform3D(5000, 0, 0, 0, -0.000218557, -5000, 0, 5000, -0.000218557, 0.0900726, -327.325, 0.485985)
 texture = ExtResource("3_sr83k")
-
-[node name="Bullets" type="Node3D" parent="."]
 
 [node name="Level1" parent="." instance=ExtResource("4_ukp2y")]
 
 [node name="PathFollow3D" parent="Level1/Path3D" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.704703, 0.141301, 0.209516)
-rotation_mode = 0
-use_model_front = true
+transform = Transform3D(-0.118399, 0.842156, -0.526061, 0, 0.529786, 0.848124, 0.992955, 0.100418, -0.0627272, 99.6759, -115.518, 37.4287)
+rotation_mode = 3
 script = SubResource("GDScript_250gr")
 
-[node name="RailCart" type="Node3D" parent="Level1/Path3D/PathFollow3D" index="0"]
-transform = Transform3D(-0.788429, 0, 0.615126, -0.0972485, 0.987421, -0.124647, -0.607389, -0.158096, -0.778513, 0.42673, -0.0448767, 0.613479)
+[node name="RailCart" parent="Level1/Path3D/PathFollow3D" index="0" instance=ExtResource("4_ug5u6")]
+transform = Transform3D(1, 0, 0, 0, 1, -7.91624e-09, -3.72529e-09, -7.91624e-09, 1, 0, 0, 0)
 
-[node name="Fox" parent="Level1/Path3D/PathFollow3D/RailCart" instance=ExtResource("1_t2hor")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.93837, 0, 0)
-
-[node name="CameraHolder" type="Node3D" parent="Level1/Path3D/PathFollow3D/RailCart"]
-
-[node name="Camera3D" type="Camera3D" parent="Level1/Path3D/PathFollow3D/RailCart/CameraHolder"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 50)
+[node name="Bullets" type="Node3D" parent="Level1/Path3D/PathFollow3D" index="1"]
+transform = Transform3D(-0.118402, 3.72538e-09, 0.992977, 0.842169, 0.529794, 0.10042, -0.526067, 0.848134, -0.0627279, -25.364, -26.502, 152.758)
 
 [connection signal="fire" from="Level1/Path3D/PathFollow3D/RailCart/Fox" to="." method="_on_fox_fire"]
 
 [editable path="Level1"]
+[editable path="Level1/Path3D/PathFollow3D/RailCart"]
