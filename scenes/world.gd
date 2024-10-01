@@ -5,14 +5,15 @@ extends Node
 const F_BULLET = preload("res://scenes/f_bullet.tscn")
 
 @onready var fox = $Level1/Path3D/PathFollow3D/RailCart/Fox
-@onready var bullets = $Bullets
+@onready var bullets = $Level1/Path3D/PathFollow3D/RailCart/Bullets
 @onready var world_environment = $WorldEnvironment
 
 func _on_fox_fire(pos, rot):
 	var projectile = F_BULLET.instantiate() as Area3D
-	projectile.position = pos
-	projectile.transform.basis = rot
 	bullets.add_child(projectile)
+	projectile.global_position = pos
+	projectile.global_basis = rot
+	
 
 func _process(delta):
 	if !fox.barrel:

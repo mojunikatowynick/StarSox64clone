@@ -8,6 +8,7 @@ extends Area3D
 
 func _ready():
 	life_timer.start()
+	await get_tree().create_timer(0.1).timeout
 	cpu_particles_3d.emitting = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

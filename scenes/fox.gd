@@ -91,7 +91,6 @@ func _physics_process(delta: float) -> void:
 		fire.emit(barrel_end.global_position, fire_rotation)
 
 
-
 func collision_check():
 	if colliders_active:
 		colliders_active = false

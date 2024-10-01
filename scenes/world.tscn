@@ -56,15 +56,15 @@ texture = ExtResource("3_sr83k")
 [node name="Level1" parent="." instance=ExtResource("4_ukp2y")]
 
 [node name="PathFollow3D" parent="Level1/Path3D" index="0"]
-transform = Transform3D(-0.118399, 0.842156, -0.526061, 0, 0.529786, 0.848124, 0.992955, 0.100418, -0.0627272, 99.6759, -115.518, 37.4287)
-rotation_mode = 3
+transform = Transform3D(0.999986, 0, 0, 0, 0.999988, 0, 0, 0, 0.999992, -4.2063, -0.00642361, 10.5156)
+rotation_mode = 0
 script = SubResource("GDScript_250gr")
 
 [node name="RailCart" parent="Level1/Path3D/PathFollow3D" index="0" instance=ExtResource("4_ug5u6")]
-transform = Transform3D(1, 0, 0, 0, 1, -7.91624e-09, -3.72529e-09, -7.91624e-09, 1, 0, 0, 0)
+transform = Transform3D(0.999997, 0, 0, 0, 0.999998, 0, 0, 0, 1.00001, 0, 0, 0)
 
-[node name="Bullets" type="Node3D" parent="Level1/Path3D/PathFollow3D" index="1"]
-transform = Transform3D(-0.118402, 3.72538e-09, 0.992977, 0.842169, 0.529794, 0.10042, -0.526067, 0.848134, -0.0627279, -25.364, -26.502, 152.758)
+[node name="Bullets" type="Node3D" parent="Level1/Path3D/PathFollow3D/RailCart"]
+transform = Transform3D(1.00001, -3.57633e-07, -2.98027e-07, -1.43052e-06, 1.00001, 4.84292e-08, 3.68806e-07, -1.00583e-07, 1.00001, 0.000335697, -0.000679022, 1.52589e-05)
 
 [connection signal="fire" from="Level1/Path3D/PathFollow3D/RailCart/Fox" to="." method="_on_fox_fire"]
 
