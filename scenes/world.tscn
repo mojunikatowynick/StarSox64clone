@@ -50,13 +50,24 @@ light_energy = 2.0
 [node name="PLACEHOLDERS!" type="Node3D" parent="."]
 
 [node name="Sprite3D" type="Sprite3D" parent="PLACEHOLDERS!"]
-transform = Transform3D(5000, 0, 0, 0, -0.000218557, -5000, 0, 5000, -0.000218557, 0.0900726, -327.325, 0.485985)
+transform = Transform3D(40, 0, 0, 0, -4.37114e-06, -100, 0, 100, -4.37114e-06, 94.0754, -54.221, 1359.35)
+texture = ExtResource("3_sr83k")
+
+[node name="Sprite3D2" type="Sprite3D" parent="PLACEHOLDERS!"]
+transform = Transform3D(40, 0, 0, 0, 100, 0, 0, 0, 100, 94.0754, -54.221, 1607.06)
+texture = ExtResource("3_sr83k")
+
+[node name="Sprite3D3" type="Sprite3D" parent="PLACEHOLDERS!"]
+transform = Transform3D(40, 0, 0, 0, 100, 0, 0, 0, 100, 261.702, -87.6945, 1673.57)
 texture = ExtResource("3_sr83k")
 
 [node name="Level1" parent="." instance=ExtResource("4_ukp2y")]
 
+[node name="Path3D" parent="Level1" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0.000610865, 0, -0.000610865, 1, 181.623, 239.905, 2006.13)
+
 [node name="PathFollow3D" parent="Level1/Path3D" index="0"]
-transform = Transform3D(0.999986, 0, 0, 0, 0.999988, 0, 0, 0, 0.999992, -4.2063, -0.00642361, 10.5156)
+transform = Transform3D(0.999986, 0, 0, 0, 0.999988, 0, 0, 0, 0.999992, -88.5979, -285.377, -695.193)
 rotation_mode = 0
 script = SubResource("GDScript_250gr")
 

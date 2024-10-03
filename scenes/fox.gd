@@ -36,7 +36,7 @@ func _physics_process(delta: float) -> void:
 	#basic movement
 	if !barrel:
 		var input_dir := Input.get_vector( "right", "left", "down", "up" )
-		var direction = (transform.basis * Vector3(input_dir.x, input_dir.y, 0)).normalized()
+		var direction = (global_transform.basis * Vector3(input_dir.x, input_dir.y, 0)).normalized()
 		current_speed_x = clamp(current_speed_x, -2, 2)
 		current_speed_y = clamp(current_speed_y, -2, 2)
 		if direction.x: 
