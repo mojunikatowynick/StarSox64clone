@@ -10,8 +10,8 @@ emission = Color(0.665294, 0, 0.0202511, 1)
 emission_energy_multiplier = 20.0
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_d2s41"]
-radius = 1.0
-height = 5.738
+radius = 7.0
+height = 14.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5ccpc"]
 albedo_color = Color(0.697003, 0.148781, 0, 1)
@@ -67,7 +67,7 @@ direction = Vector3(0, 0, 0)
 gravity = Vector3(0, 0, 0)
 initial_velocity_max = 30.3
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="timeout" from="Timer/LifeTimer" to="." method="_on_life_timer_timeout"]
 
 [editable path="Fbullet"]

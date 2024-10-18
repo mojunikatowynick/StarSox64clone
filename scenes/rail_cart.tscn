@@ -1,10 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://hrpd64vfq587"]
+[gd_scene load_steps=2 format=3 uid="uid://hrpd64vfq587"]
 
 [ext_resource type="PackedScene" uid="uid://cpqopqy873vp4" path="res://scenes/fox.tscn" id="1_24c8t"]
-[ext_resource type="Script" path="res://scenes/rail_cart.gd" id="1_b1vc3"]
 
 [node name="RailCart" type="Node3D"]
-script = ExtResource("1_b1vc3")
 
 [node name="Fox" parent="." instance=ExtResource("1_24c8t")]
 

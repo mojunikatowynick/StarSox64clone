@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://cbl7rqc8wmfuc"]
+
+[ext_resource type="PackedScene" uid="uid://duhsb31d6aymh" path="res://Graphics/Enviroment/ring.blend" id="1_7rs3v"]
+[ext_resource type="Script" path="res://scenes/Enviroment/ring.gd" id="1_brauy"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_5vtp8"]
+height = 10.0
+radius = 9.0
+
+[node name="Ring" type="Area3D"]
+script = ExtResource("1_brauy")
+
+[node name="ring" parent="." instance=ExtResource("1_7rs3v")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("CylinderShape3D_5vtp8")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+
+[editable path="ring"]

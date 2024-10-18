@@ -1,9 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://bhyhsvivo3vqy"]
+[gd_scene load_steps=21 format=3 uid="uid://bhyhsvivo3vqy"]
 
 [ext_resource type="Script" path="res://scenes/world.gd" id="1_y0ffe"]
-[ext_resource type="Texture2D" uid="uid://dvukf8pohr2dr" path="res://icon.svg" id="3_sr83k"]
 [ext_resource type="PackedScene" uid="uid://hrpd64vfq587" path="res://scenes/rail_cart.tscn" id="4_ug5u6"]
 [ext_resource type="PackedScene" uid="uid://bodqnqhpfxq40" path="res://scenes/Levels/level_1.tscn" id="4_ukp2y"]
+[ext_resource type="PackedScene" uid="uid://cbl7rqc8wmfuc" path="res://scenes/Enviroment/ring.tscn" id="5_eseqm"]
+[ext_resource type="PackedScene" uid="uid://6eteo6lwxx76" path="res://Graphics/Enviroment/StartingZone.blend" id="5_l7geb"]
+[ext_resource type="PackedScene" uid="uid://bklwd82tkqhx3" path="res://scenes/UI/ui.tscn" id="6_nxcbx"]
+[ext_resource type="PackedScene" uid="uid://tirgf5vs5wth" path="res://scenes/Enviroment/asteroid.tscn" id="6_uo170"]
+[ext_resource type="Script" path="res://scenes/a_1.gd" id="7_xfj2a"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_dqywx"]
 sky_top_color = Color(0.225408, 0.603492, 0.701855, 1)
@@ -28,13 +32,223 @@ ambient_light_source = 3
 script/source = "extends PathFollow3D
 
 
-var prog_speed = 100
+@export var prog_speed: int
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	progress += 100 * delta
-	print(progress)
+	progress += prog_speed * delta
+	#print(progress)
 "
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_eterp"]
+size = Vector3(1500, 1500, 5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tuoul"]
+size = Vector3(1500, 1500, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_oo83l"]
+size = Vector3(20, 20, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_51jk0"]
+
+[sub_resource type="Animation" id="Animation_x7trw"]
+resource_name = "Opening_Cinematic"
+length = 20.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Level1/Path3D/PathFollow3D/RailCart/Camera3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4, 4.06667, 11.9333, 12.0333, 20),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(12.3436, 7.70886, 8.44533), Vector3(-12.7008, 10.7275, 16.5496), Vector3(-37.5705, 25.7998, -24.7064), Vector3(-9.97739, 18.9857, -32.4582), Vector3(46.124, 20.5644, -9.43614), Vector3(3.82657, 82.6881, -77.559)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Level1/Path3D/PathFollow3D/RailCart/Camera3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 4, 4.06667, 11.9333, 12.0333, 20),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.324036, 0.712253, -0.117799), Vector3(-0.169812, -0.71546, -0.0998779), Vector3(-0.331947, -2.15074, 0.118608), Vector3(-0.587342, -2.85306, 0.0840964), Vector3(-0.260582, 1.74822, 0.403066), Vector3(-0.873529, 2.75905, -0.502561)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("UI/Control:anchor_top")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("UI/Control:anchor_bottom")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("UI/Control/BlackOut:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.5, 3.4, 3.86667, 4.1, 4.5, 11.3333, 11.8, 12.0333, 12.4333, 19.4, 19.8667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0, 0, 0, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_10rsl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Level1/Path3D/PathFollow3D/RailCart/Camera3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(21.6905, 12.5125, 19.2704)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Level1/Path3D/PathFollow3D/RailCart/Camera3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.169812, -0.71546, 0.30071)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("UI/Control:anchor_top")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("UI/Control:anchor_bottom")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.1]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("UI/Control/BlackOut:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_vwrpx"]
+resource_name = "Start_Anim"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Level1/Path3D/PathFollow3D/RailCart/Camera3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.466667),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, -50)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Level1/Path3D/PathFollow3D/RailCart/Camera3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.466667),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -3.14159, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("UI/Control:anchor_top")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.266667, 1.46667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-0.01, -0.01, -0.1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("UI/Control:anchor_bottom")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.266667, 1.46667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 1.0, 1.1]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("UI/Control/BlackOut:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.233333, 0.466667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nh02f"]
+_data = {
+"Opening_Cinematic": SubResource("Animation_x7trw"),
+"RESET": SubResource("Animation_10rsl"),
+"Start_Anim": SubResource("Animation_vwrpx")
+}
 
 [node name="World" type="Node"]
 script = ExtResource("1_y0ffe")
@@ -47,37 +261,215 @@ transform = Transform3D(1, 0, 0, 0, -0.40833, 0.912834, 0, -0.912834, -0.40833, 
 light_color = Color(0.843137, 0.705882, 0.145098, 1)
 light_energy = 2.0
 
-[node name="PLACEHOLDERS!" type="Node3D" parent="."]
-
-[node name="Sprite3D" type="Sprite3D" parent="PLACEHOLDERS!"]
-transform = Transform3D(40, 0, 0, 0, -4.37114e-06, -100, 0, 100, -4.37114e-06, 94.0754, -54.221, 1359.35)
-texture = ExtResource("3_sr83k")
-
-[node name="Sprite3D2" type="Sprite3D" parent="PLACEHOLDERS!"]
-transform = Transform3D(40, 0, 0, 0, 100, 0, 0, 0, 100, 94.0754, -54.221, 1607.06)
-texture = ExtResource("3_sr83k")
-
-[node name="Sprite3D3" type="Sprite3D" parent="PLACEHOLDERS!"]
-transform = Transform3D(40, 0, 0, 0, 100, 0, 0, 0, 100, 261.702, -87.6945, 1673.57)
-texture = ExtResource("3_sr83k")
+[node name="Bullets" type="Node3D" parent="."]
+transform = Transform3D(0.999993, -3.57627e-07, -2.98022e-07, -1.43027e-06, 0.999996, 0.000610921, 3.69681e-07, -0.000610963, 1.00001, 0.000335691, -0.000679003, 1.56737e-05)
 
 [node name="Level1" parent="." instance=ExtResource("4_ukp2y")]
 
-[node name="Path3D" parent="Level1" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0.000610865, 0, -0.000610865, 1, 181.623, 239.905, 2006.13)
-
 [node name="PathFollow3D" parent="Level1/Path3D" index="0"]
-transform = Transform3D(0.999986, 0, 0, 0, 0.999988, 0, 0, 0, 0.999992, -88.5979, -285.377, -695.193)
+transform = Transform3D(0.999986, 0, 0, 0, 0.999988, 0, 0, 0, 0.999992, 0, 0, 0)
 rotation_mode = 0
 script = SubResource("GDScript_250gr")
 
 [node name="RailCart" parent="Level1/Path3D/PathFollow3D" index="0" instance=ExtResource("4_ug5u6")]
 transform = Transform3D(0.999997, 0, 0, 0, 0.999998, 0, 0, 0, 1.00001, 0, 0, 0)
 
-[node name="Bullets" type="Node3D" parent="Level1/Path3D/PathFollow3D/RailCart"]
-transform = Transform3D(1.00001, -3.57633e-07, -2.98027e-07, -1.43052e-06, 1.00001, 4.84292e-08, 3.68806e-07, -1.00583e-07, 1.00001, 0.000335697, -0.000679022, 1.52589e-05)
+[node name="Fox" parent="Level1/Path3D/PathFollow3D/RailCart" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.31323e-10, -2.7818)
+
+[node name="Camera3D" parent="Level1/Path3D/PathFollow3D/RailCart" index="1"]
+transform = Transform3D(0.753756, -0.117687, -0.64653, 0.291938, 0.941389, 0.168997, 0.588746, -0.31613, 0.743935, 21.6905, 12.5125, 19.2704)
+
+[node name="Trigger" type="Node3D" parent="Level1/Path3D/PathFollow3D/RailCart"]
+
+[node name="Trigger" type="Area3D" parent="Level1/Path3D/PathFollow3D/RailCart/Trigger" groups=["Trigger"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 500)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level1/Path3D/PathFollow3D/RailCart/Trigger/Trigger"]
+shape = SubResource("BoxShape3D_eterp")
+
+[node name="TriggerPassed" type="Area3D" parent="Level1/Path3D/PathFollow3D/RailCart/Trigger" groups=["TriggerDissapear"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Level1/Path3D/PathFollow3D/RailCart/Trigger/TriggerPassed"]
+shape = SubResource("BoxShape3D_tuoul")
+
+[node name="Enviroment" type="Node3D" parent="."]
+
+[node name="StartingZone" parent="Enviroment" instance=ExtResource("5_l7geb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.53082, 0)
+
+[node name="GameStart" type="Area3D" parent="Enviroment/StartingZone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 38.468)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enviroment/StartingZone/GameStart"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 117.665)
+shape = SubResource("BoxShape3D_oo83l")
+
+[node name="Rings" type="Node3D" parent="Enviroment"]
+
+[node name="Ring" parent="Enviroment/Rings" instance=ExtResource("5_eseqm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, -15, 1465.87)
+
+[node name="Ring2" parent="Enviroment/Rings" instance=ExtResource("5_eseqm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45, 20, 1696.66)
+
+[node name="Ring3" parent="Enviroment/Rings" instance=ExtResource("5_eseqm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, -10, 1952.57)
+
+[node name="Collisions" type="Node3D" parent="Enviroment"]
+
+[node name="Asteroids1" type="Node3D" parent="Enviroment/Collisions"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2383.73)
+
+[node name="TriggerAsteroids" type="Area3D" parent="Enviroment/Collisions/Asteroids1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1366.34)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enviroment/Collisions/Asteroids1/TriggerAsteroids"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -298.465)
+shape = SubResource("BoxShape3D_51jk0")
+
+[node name="A1" type="Node3D" parent="Enviroment/Collisions/Asteroids1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 271.214, 713.99, 952.683)
+script = ExtResource("7_xfj2a")
+change_angle = 10
+
+[node name="Asteroid" parent="Enviroment/Collisions/Asteroids1/A1" instance=ExtResource("6_uo170")]
+transform = Transform3D(12, 0, 0, 0, 12, 0, 0, 0, 12, 0, 130.163, 166.418)
+
+[node name="A10" type="Node3D" parent="Enviroment/Collisions/Asteroids1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 271.214, 1022.63, 1686.86)
+script = ExtResource("7_xfj2a")
+change_angle = 10
+
+[node name="Asteroid" parent="Enviroment/Collisions/Asteroids1/A10" instance=ExtResource("6_uo170")]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
+
+[node name="A2" type="Node3D" parent="Enviroment/Collisions/Asteroids1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 639.873, 937.392, 1037.49)
+script = ExtResource("7_xfj2a")
+change_angle = 15
+
+[node name="Asteroid" parent="Enviroment/Collisions/Asteroids1/A2" instance=ExtResource("6_uo170")]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
+
+[node name="A9" type="Node3D" parent="Enviroment/Collisions/Asteroids1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 639.873, 1240.91, 278.693)
+script = ExtResource("7_xfj2a")
+change_angle = 15
+
+[node name="Asteroid" parent="Enviroment/Collisions/Asteroids1/A9" instance=ExtResource("6_uo170")]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
+
+[node name="A4" type="Node3D" parent="Enviroment/Collisions/Asteroids1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -235.323, 937.392, 1037.49)
+script = ExtResource("7_xfj2a")
+change_angle = -1
+
+[node name="Asteroid" parent="Enviroment/Collisions/Asteroids1/A4" instance=ExtResource("6_uo170")]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
+
+[node name="A11" type="Node3D" parent="Enviroment/Collisions/Asteroids1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 271.214, 1229.74, 2207.01)
+script = ExtResource("7_xfj2a")
+change_angle = 10
+
+[node name="Asteroid" parent="Enviroment/Collisions/Asteroids1/A11" instance=ExtResource("6_uo170")]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
+
+[node name="A12" type="Node3D" parent="Enviroment/Collisions/Asteroids1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 639.873, 1144.5, 1557.65)
+script = ExtResource("7_xfj2a")
+change_angle = 15
+
+[node name="Asteroid" parent="Enviroment/Collisions/Asteroids1/A12" instance=ExtResource("6_uo170")]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
+
+[node name="A13" type="Node3D" parent="Enviroment/Collisions/Asteroids1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 639.873, 1448.02, 798.848)
+script = ExtResource("7_xfj2a")
+change_angle = 15
+
+[node name="Asteroid" parent="Enviroment/Collisions/Asteroids1/A13" instance=ExtResource("6_uo170")]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
+
+[node name="A14" type="Node3D" parent="Enviroment/Collisions/Asteroids1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -235.323, 1144.5, 1557.65)
+script = ExtResource("7_xfj2a")
+change_angle = -1
+
+[node name="Asteroid" parent="Enviroment/Collisions/Asteroids1/A14" instance=ExtResource("6_uo170")]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
+
+[node name="A5" type="Node3D" parent="Enviroment/Collisions/Asteroids1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -402.597, 1202.08, 1412.07)
+script = ExtResource("7_xfj2a")
+change_angle = -2
+
+[node name="Asteroid" parent="Enviroment/Collisions/Asteroids1/A5" instance=ExtResource("6_uo170")]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
+
+[node name="A6" type="Node3D" parent="Enviroment/Collisions/Asteroids1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -718.59, 1446.16, 1783.76)
+script = ExtResource("7_xfj2a")
+change_angle = -15
+
+[node name="Asteroid" parent="Enviroment/Collisions/Asteroids1/A6" instance=ExtResource("6_uo170")]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
+
+[node name="A7" type="Node3D" parent="Enviroment/Collisions/Asteroids1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -994.837, 1446.16, 1633.6)
+script = ExtResource("7_xfj2a")
+change_angle = -23
+
+[node name="Asteroid" parent="Enviroment/Collisions/Asteroids1/A7" instance=ExtResource("6_uo170")]
+transform = Transform3D(13, 0, 0, 0, 13, 0, 0, 0, 13, 0, 0, 0)
+
+[node name="A8" type="Node3D" parent="Enviroment/Collisions/Asteroids1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -994.837, 1446.16, 1314.18)
+script = ExtResource("7_xfj2a")
+change_angle = -14
+
+[node name="Asteroid" parent="Enviroment/Collisions/Asteroids1/A8" instance=ExtResource("6_uo170")]
+transform = Transform3D(13, 0, 0, 0, 13, 0, 0, 0, 13, 0, 0, 0)
+
+[node name="A3" type="Node3D" parent="Enviroment/Collisions/Asteroids1"]
+transform = Transform3D(1, 0, 0, 0, 0.999882, -0.0153583, 0, 0.0153583, 0.999882, 623.463, 1130.91, 1327.26)
+script = ExtResource("7_xfj2a")
+change_angle = 20
+
+[node name="Asteroid" parent="Enviroment/Collisions/Asteroids1/A3" instance=ExtResource("6_uo170")]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
+
+[node name="Animation" type="Node" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Animation"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_nh02f")
+}
+
+[node name="UI" parent="." instance=ExtResource("6_nxcbx")]
+
+[node name="CinematicBlackTop" parent="UI/Control" index="0"]
+anchors_preset = -1
+
+[node name="BlackOut" parent="UI/Control" index="2"]
+modulate = Color(0, 0, 0, 0)
+
+[node name="Triggers" type="Node3D" parent="."]
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="CanBoostTimer" type="Timer" parent="Timers"]
+wait_time = 5.0
+one_shot = true
 
 [connection signal="fire" from="Level1/Path3D/PathFollow3D/RailCart/Fox" to="." method="_on_fox_fire"]
+[connection signal="body_entered" from="Enviroment/StartingZone/GameStart" to="." method="_on_game_start_body_entered"]
+[connection signal="area_entered" from="Enviroment/Collisions/Asteroids1/TriggerAsteroids" to="." method="_on_trigger_asteroids_area_entered"]
+[connection signal="timeout" from="Timers/CanBoostTimer" to="." method="_on_can_boost_timer_timeout"]
 
 [editable path="Level1"]
 [editable path="Level1/Path3D/PathFollow3D/RailCart"]
+[editable path="UI"]

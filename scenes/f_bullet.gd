@@ -1,6 +1,6 @@
 extends Area3D
 
-@export var speed: int = 500
+@export var speed: int = 700
 @export var dmg: int = 10
 @onready var life_timer = $Timer/LifeTimer
 @onready var cpu_particles_3d = $Particles/CPUParticles3D
@@ -18,8 +18,7 @@ func _process(delta):
 func _on_life_timer_timeout():
 	queue_free()
 
-func _on_body_entered(body):
-	#print(body)
-	if "hit" in body and body.is_in_group("Enemy"):
-		body.hit(dmg)
+func _on_area_entered(area):
+	if "hit" in area and area.is_in_group("Enemy"):
+		area.hit(dmg)
 		queue_free()

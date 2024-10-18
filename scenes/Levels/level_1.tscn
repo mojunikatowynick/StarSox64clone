@@ -1,22 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://bodqnqhpfxq40"]
-
-[ext_resource type="Script" path="res://scenes/Levels/level_1.gd" id="1_rx1fv"]
+[gd_scene load_steps=2 format=3 uid="uid://bodqnqhpfxq40"]
 
 [sub_resource type="Curve3D" id="Curve3D_eyr3x"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -88.5979, -285.377, -695.193, -16.8417, 0.0732422, -112.103, 16.8417, -0.0732422, 112.103, -88.7583, -280.86, -501.517, 0, 5.93872, -319.887, 0, -5.93872, 319.887, 46.6055, -277.509, 196.535, 0, -6.56647, -128.201, 0, 6.56647, 128.201, -8.56242, -271.586, 829.578, -0.00012207, 15.1778, -180.168, 0.00012207, -15.1778, 180.168, 72.8385, -343.199, 1564.39, 92.6888, 102.638, -394.86, -92.6888, -102.638, 394.86, -116.831, -350.463, 2566.71, 0, -20.6638, -601.505, 0, 20.6638, 601.505, -10.99, -206.322, 4160.96, 0, 29.7584, -515.246, 0, -29.7584, 515.246, -31.814, -213.172, 5046.37, -0.00012207, 17.159, -546.801, 0.00012207, -17.159, 546.801, 3.93892, -163.326, 6076.93, 0, 0, 0, 0, 0, 0, -50.742, -31.6456, 7412.49),
-"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8000),
+"tilts": PackedFloat32Array(0, 0)
 }
-point_count = 10
+point_count = 2
 
 [node name="Level1" type="Node3D"]
-script = ExtResource("1_rx1fv")
 
 [node name="Path3D" type="Path3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0.000610865, 0, -0.000610865, 1, 181.623, 242.502, 2005.91)
+transform = Transform3D(1, 0, 0, 0, 1, 0.000610865, 0, -0.000610865, 1, 0, 0, 0)
 rotation_order = 0
 curve = SubResource("Curve3D_eyr3x")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
-transform = Transform3D(0.988693, -0.00130763, 0.1499, 1.74622e-10, 0.999961, 0.00872298, -0.149905, -0.00862442, 0.988661, -88.5979, -285.377, -695.193)
+transform = Transform3D(0.999992, 0, 8.74226e-08, 0, 0.999998, 0, -8.74221e-08, 0, 0.999998, 0, 0, 0)
 use_model_front = true
