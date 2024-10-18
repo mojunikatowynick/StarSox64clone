@@ -1,0 +1,136 @@
+[gd_scene load_steps=12 format=3 uid="uid://cmd2yxq3pq2t3"]
+
+[ext_resource type="Script" path="res://scenes/enemy.gd" id="1_7tqbl"]
+[ext_resource type="PackedScene" uid="uid://62ru1gkggh02" path="res://Graphics/Ships/Enemy1.blend" id="1_bxwn8"]
+[ext_resource type="Shader" uid="uid://hmufp7ysukj4" path="res://scenes/Shaders/enemy_hit_flash.tres" id="3_f2y3g"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6uosy"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("3_f2y3g")
+shader_parameter/Enabled = false
+shader_parameter/Tint = Color(1, 1, 1, 1)
+shader_parameter/ColorParameter = Color(0.837424, 0, 0.122433, 1)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_mx3v4"]
+height = 11.809
+radius = 3.0
+
+[sub_resource type="Animation" id="Animation_jn5h0"]
+resource_name = "hit_flash"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Enemy1/Cube:surface_material_override/0:shader_parameter/Enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_qqrj8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Enemy1/Cube:surface_material_override/0:shader_parameter/Enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0t2o6"]
+_data = {
+"RESET": SubResource("Animation_qqrj8"),
+"hit_flash": SubResource("Animation_jn5h0")
+}
+
+[sub_resource type="SphereMesh" id="SphereMesh_s8gft"]
+radial_segments = 12
+rings = 10
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hytgd"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_ctekw"]
+radius = 1.0
+height = 2.0
+radial_segments = 12
+rings = 10
+
+[node name="Enemy" type="Area3D" groups=["Enemy"]]
+script = ExtResource("1_7tqbl")
+
+[node name="Enemy1" parent="." instance=ExtResource("1_bxwn8")]
+
+[node name="Cube" parent="Enemy1" index="0"]
+surface_material_override/0 = SubResource("ShaderMaterial_6uosy")
+
+[node name="WeaponHandler" type="Node3D" parent="."]
+
+[node name="Marker3D" type="Marker3D" parent="WeaponHandler"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("CylinderShape3D_mx3v4")
+
+[node name="HitFlashAnim" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_0t2o6")
+}
+
+[node name="Particles" type="Node3D" parent="."]
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="Particles"]
+emitting = false
+amount = 15
+lifetime = 0.5
+explosiveness = 0.37
+randomness = 0.59
+lifetime_randomness = 0.11
+mesh = SubResource("SphereMesh_s8gft")
+direction = Vector3(0, 1, -1)
+spread = 12.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 15.0
+linear_accel_min = -3.45
+linear_accel_max = 14.44
+damping_min = 3.093
+damping_max = 5.155
+scale_amount_min = 0.5
+scale_amount_max = 2.0
+color = Color(0, 0, 0, 1)
+hue_variation_max = 1.0
+
+[node name="CPUParticles3D2" type="CPUParticles3D" parent="Particles"]
+material_override = SubResource("StandardMaterial3D_hytgd")
+emitting = false
+amount = 15
+lifetime = 0.5
+explosiveness = 0.37
+randomness = 0.59
+lifetime_randomness = 0.11
+mesh = SubResource("SphereMesh_ctekw")
+direction = Vector3(0, 1, -1)
+spread = 12.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 15.0
+linear_accel_min = -3.45
+linear_accel_max = 14.44
+damping_min = 3.093
+damping_max = 5.155
+scale_amount_min = 0.5
+scale_amount_max = 2.0
+color = Color(0, 0, 0, 1)
+hue_variation_max = 1.0
+
+[editable path="Enemy1"]

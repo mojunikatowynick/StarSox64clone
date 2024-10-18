@@ -1,6 +1,8 @@
-[gd_scene load_steps=21 format=3 uid="uid://bhyhsvivo3vqy"]
+[gd_scene load_steps=28 format=3 uid="uid://bhyhsvivo3vqy"]
 
 [ext_resource type="Script" path="res://scenes/world.gd" id="1_y0ffe"]
+[ext_resource type="Script" path="res://scenes/enemy_rails.gd" id="4_5e84b"]
+[ext_resource type="Script" path="res://scenes/path_follow_3d.gd" id="4_8kqow"]
 [ext_resource type="PackedScene" uid="uid://hrpd64vfq587" path="res://scenes/rail_cart.tscn" id="4_ug5u6"]
 [ext_resource type="PackedScene" uid="uid://bodqnqhpfxq40" path="res://scenes/Levels/level_1.tscn" id="4_ukp2y"]
 [ext_resource type="PackedScene" uid="uid://cbl7rqc8wmfuc" path="res://scenes/Enviroment/ring.tscn" id="5_eseqm"]
@@ -8,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bklwd82tkqhx3" path="res://scenes/UI/ui.tscn" id="6_nxcbx"]
 [ext_resource type="PackedScene" uid="uid://tirgf5vs5wth" path="res://scenes/Enviroment/asteroid.tscn" id="6_uo170"]
 [ext_resource type="Script" path="res://scenes/a_1.gd" id="7_xfj2a"]
+[ext_resource type="PackedScene" uid="uid://cmd2yxq3pq2t3" path="res://scenes/enemy.tscn" id="9_fte75"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_dqywx"]
 sky_top_color = Color(0.225408, 0.603492, 0.701855, 1)
@@ -45,6 +48,34 @@ size = Vector3(1500, 1500, 5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tuoul"]
 size = Vector3(1500, 1500, 1)
+
+[sub_resource type="Curve3D" id="Curve3D_d6xie"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -70, 0, 0, 0, 0, 0, 0, 0, 0, -15, 0, 70),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve3D" id="Curve3D_3f067"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 70, 0, 0, 0, 0, 0, 0, 0, 0, 15, 0, 70),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve3D" id="Curve3D_nhbjq"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, -70, 0, 0, 0, 0, 0, 0, 0, 0, -15, 70),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve3D" id="Curve3D_7knog"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 70, 0, 0, 0, 0, 0, 0, 0, 0, 15, 70),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_oo83l"]
 size = Vector3(20, 20, 1)
@@ -293,6 +324,49 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Level1/Path3D/PathFollow3D/RailCart/Trigger/TriggerPassed"]
 shape = SubResource("BoxShape3D_tuoul")
+
+[node name="EnemyRails" type="Node3D" parent="Level1/Path3D/PathFollow3D/RailCart"]
+script = ExtResource("4_5e84b")
+
+[node name="Path3D" type="Path3D" parent="Level1/Path3D/PathFollow3D/RailCart/EnemyRails"]
+curve = SubResource("Curve3D_d6xie")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Level1/Path3D/PathFollow3D/RailCart/EnemyRails/Path3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -70, 0, 0)
+rotation_mode = 0
+script = ExtResource("4_8kqow")
+
+[node name="Enemy" parent="Level1/Path3D/PathFollow3D/RailCart/EnemyRails/Path3D/PathFollow3D" instance=ExtResource("9_fte75")]
+
+[node name="Path3D2" type="Path3D" parent="Level1/Path3D/PathFollow3D/RailCart/EnemyRails"]
+curve = SubResource("Curve3D_3f067")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Level1/Path3D/PathFollow3D/RailCart/EnemyRails/Path3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 70, 0, 0)
+rotation_mode = 0
+script = ExtResource("4_8kqow")
+
+[node name="Enemy" parent="Level1/Path3D/PathFollow3D/RailCart/EnemyRails/Path3D2/PathFollow3D" instance=ExtResource("9_fte75")]
+
+[node name="Path3D3" type="Path3D" parent="Level1/Path3D/PathFollow3D/RailCart/EnemyRails"]
+curve = SubResource("Curve3D_nhbjq")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Level1/Path3D/PathFollow3D/RailCart/EnemyRails/Path3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -70, 0)
+rotation_mode = 0
+script = ExtResource("4_8kqow")
+
+[node name="Enemy" parent="Level1/Path3D/PathFollow3D/RailCart/EnemyRails/Path3D3/PathFollow3D" instance=ExtResource("9_fte75")]
+
+[node name="Path3D4" type="Path3D" parent="Level1/Path3D/PathFollow3D/RailCart/EnemyRails"]
+curve = SubResource("Curve3D_7knog")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Level1/Path3D/PathFollow3D/RailCart/EnemyRails/Path3D4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 70, 0)
+rotation_mode = 0
+script = ExtResource("4_8kqow")
+
+[node name="Enemy" parent="Level1/Path3D/PathFollow3D/RailCart/EnemyRails/Path3D4/PathFollow3D" instance=ExtResource("9_fte75")]
 
 [node name="Enviroment" type="Node3D" parent="."]
 
