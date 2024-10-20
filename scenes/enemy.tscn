@@ -16,6 +16,21 @@ shader_parameter/ColorParameter = Color(0.837424, 0, 0.122433, 1)
 height = 11.809
 radius = 3.0
 
+[sub_resource type="Animation" id="Animation_qqrj8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Enemy1/Cube:surface_material_override/0:shader_parameter/Enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
 [sub_resource type="Animation" id="Animation_jn5h0"]
 resource_name = "hit_flash"
 length = 0.2
@@ -30,21 +45,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
-}
-
-[sub_resource type="Animation" id="Animation_qqrj8"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Enemy1/Cube:surface_material_override/0:shader_parameter/Enabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0t2o6"]
@@ -66,6 +66,8 @@ radial_segments = 12
 rings = 10
 
 [node name="Enemy" type="Area3D" groups=["Enemy"]]
+collision_layer = 2
+collision_mask = 4
 script = ExtResource("1_7tqbl")
 
 [node name="Enemy1" parent="." instance=ExtResource("1_bxwn8")]

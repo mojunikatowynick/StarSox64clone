@@ -46,6 +46,7 @@ _data = {
 }
 
 [node name="Fox" type="CharacterBody3D" groups=["Fox"]]
+collision_mask = 8
 motion_mode = 1
 slide_on_ceiling = false
 script = ExtResource("1_lncvu")

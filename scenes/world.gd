@@ -54,13 +54,8 @@ func _process(delta):
 	#print(flying)
 	if !fox.barrel:
 		fox_camera.rotation.z = fox.velocity.x / 15 * delta
-		fox_camera.rotation.x = - fox.velocity.y / 15 * delta
-		
-		#world_environment.environment.sky_rotation.z = fox.velocity.x / 15 * delta
-		#world_environment.environment.sky_rotation.x = - fox.velocity.y / 15 * delta
-		#bullets.rotation.z = fox.velocity.x / 15 * delta
-		#bullets.rotation.x = - fox.velocity.y / 15 * delta
-		
+		fox_camera.rotation.x = fox.velocity.y / 15 * delta
+
 func _on_fox_fire(pos, rot):
 	var projectile = F_BULLET.instantiate() as Area3D
 	bullets.add_child(projectile)
@@ -80,3 +75,9 @@ func _on_trigger_asteroids_area_entered(area):
 		for asteroid in asteroids_1.get_children():
 			if "move_true" in asteroid:
 				asteroid.move_true()
+
+
+func _on_area_3d_area_entered(area):
+	if area.is_in_group("Enemy"):
+		if !area.alive and "activate_enemy" in area:
+			area.activate_enemy()

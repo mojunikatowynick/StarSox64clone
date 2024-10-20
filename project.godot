@@ -67,6 +67,14 @@ rightbarrel={
 ]
 }
 
+[layer_names]
+
+3d_physics/layer_1="player"
+3d_physics/layer_2="enemy"
+3d_physics/layer_3="projectiles_player"
+3d_physics/layer_4="projectiles_enemy"
+3d_physics/layer_5="areas"
+
 [rendering]
 
 renderer/rendering_method="mobile"
