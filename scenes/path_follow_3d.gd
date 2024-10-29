@@ -1,6 +1,5 @@
 extends PathFollow3D
 
-
 func _process(delta):
 	if get_child(0).alive:
 		progress += 20 * delta

@@ -30,8 +30,11 @@ var dirX: float
 
 func _ready():
 	add_to_group("Fox")
-	
+
 func _physics_process(delta: float) -> void:
+	
+	Global.fox_position = global_position
+	
 	if !cinematic:
 		move_and_slide()
 		#print(col_left_wing.disabled)

@@ -7,3 +7,7 @@ var cinematic_bool: bool = true
 
 const flight_speed: int = 100
 var asteroid_speed: float = 1.5
+
+var fox_position: Vector3
+
+@onready var Wrold: Node = get_node("/root/World")

@@ -78,6 +78,7 @@ surface_material_override/0 = SubResource("ShaderMaterial_6uosy")
 [node name="WeaponHandler" type="Node3D" parent="."]
 
 [node name="Marker3D" type="Marker3D" parent="WeaponHandler"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.66698)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
@@ -134,5 +135,12 @@ scale_amount_min = 0.5
 scale_amount_max = 2.0
 color = Color(0, 0, 0, 1)
 hue_variation_max = 1.0
+
+[node name="Timer" type="Node" parent="."]
+
+[node name="FireTimer" type="Timer" parent="Timer"]
+wait_time = 3.0
+
+[connection signal="timeout" from="Timer/FireTimer" to="." method="_on_fire_timer_timeout"]
 
 [editable path="Enemy1"]

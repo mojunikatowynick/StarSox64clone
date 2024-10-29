@@ -3,6 +3,7 @@ extends Node
 #preloads
 #projectiles
 const F_BULLET = preload("res://scenes/f_bullet.tscn")
+const ENEM_BULLET = preload("res://scenes/enem_bullet.tscn")
 
 @onready var fox = $Level1/Path3D/PathFollow3D/RailCart/Fox
 @onready var bullets = $Bullets
@@ -81,3 +82,10 @@ func _on_area_3d_area_entered(area):
 	if area.is_in_group("Enemy"):
 		if !area.alive and "activate_enemy" in area:
 			area.activate_enemy()
+
+
+func _on_enemy_enemy_fire(pos, rot):
+	var enem_projectile = ENEM_BULLET.instantiate() as Area3D
+	bullets.add_child(enem_projectile)
+	enem_projectile.global_position = pos
+	#enem_projectile.global_basis = rot

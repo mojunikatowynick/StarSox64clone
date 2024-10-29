@@ -312,6 +312,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.31323e-10, -2.7818)
 
 [node name="Camera3D" parent="Level1/Path3D/PathFollow3D/RailCart" index="1"]
 transform = Transform3D(0.753756, -0.117687, -0.64653, 0.291938, 0.941389, 0.168997, 0.588746, -0.31613, 0.743935, 21.6905, 12.5125, 19.2704)
+current = true
 
 [node name="Trigger" type="Node3D" parent="Level1/Path3D/PathFollow3D/RailCart"]
 
