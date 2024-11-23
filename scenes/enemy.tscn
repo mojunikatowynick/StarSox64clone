@@ -141,6 +141,11 @@ hue_variation_max = 1.0
 [node name="FireTimer" type="Timer" parent="Timer"]
 wait_time = 3.0
 
+[node name="Aim" type="Marker3D" parent="."]
+
+[node name="Target" type="Marker3D" parent="Aim"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10.6514)
+
 [connection signal="timeout" from="Timer/FireTimer" to="." method="_on_fire_timer_timeout"]
 
 [editable path="Enemy1"]

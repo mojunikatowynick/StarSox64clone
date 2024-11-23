@@ -20,8 +20,6 @@ var target_velocity = Vector3.ZERO
 @onready var barrel_end = $WeaponHandler/BarrelEnd
 @onready var crosshair = $WeaponHandler/Crosshair
 
-#var colliders = []
-
 var cinematic: bool = true
 var barrel: bool = false
 var can_barrel: bool = true
@@ -32,7 +30,7 @@ func _ready():
 	add_to_group("Fox")
 
 func _physics_process(delta: float) -> void:
-	
+
 	Global.fox_position = global_position
 	
 	if !cinematic:

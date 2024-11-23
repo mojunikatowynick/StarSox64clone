@@ -1,0 +1,491 @@
+[gd_scene load_steps=23 format=3 uid="uid://cayibpbna6tui"]
+
+[ext_resource type="Script" path="res://scenes/boss.gd" id="1_ab5d6"]
+[ext_resource type="PackedScene" uid="uid://cqsawyw2s6rqi" path="res://Graphics/Ships/Boss.blend" id="1_souxo"]
+[ext_resource type="Script" path="res://scenes/eye.gd" id="3_nicj1"]
+[ext_resource type="Texture2D" uid="uid://cr4845igr3pgy" path="res://Graphics/Textures/Eye.jpg" id="3_rjrcw"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_n5wqv"]
+points = PackedVector3Array(-0.833094, -1.60752, -3.09104, -0.398302, 0.424872, 6.06584, 0.327521, 0.857146, 5.89956, -3.14392, 3.59626, 0.824082, -3.8682, -3.62778, 2.12247, 4.11854, -0.740226, 1.25553, 1.18499, -4.62572, 2.26446, 1.7577, 3.58014, 0.106254, -5.20865, 0.42396, 1.25543, 1.11602, 1.35561, -3.27827, 1.17851, -3.74805, -1.32585, -3.86042, 0.127949, -1.9154, -3.14595, -1.0259, 5.30391, -2.26686, 3.14279, 4.12835, 0.896265, -3.03921, 4.99925, 3.04069, 1.55914, 3.83776, -2.84208, -3.75095, -0.897049, 0.0360444, 4.04554, 3.14026, -1.55312, 3.59082, -1.05064, 3.20842, -1.74689, 3.85346, -1.69708, -4.62918, 2.98603, 3.48365, -2.17293, -0.180862, 3.33709, 1.56345, -0.466749, -4.73596, 0.562995, 3.42443, -1.12546, -4.96322, 0.672752, -4.89247, -2.04246, 0.676723, 2.47353, -1.30935, -2.04758, -2.12765, -2.75285, 5.14666, -2.2709, 1.42256, -2.62967, -3.8557, 2.28737, -0.758481, -4.56625, -2.17087, 3.12354, 3.20557, 2.43518, 2.12067)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rm5f1"]
+albedo_color = Color(0.487555, 0.288097, 0.285212, 1)
+metallic = 0.53
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5hqoq"]
+albedo_color = Color(0.8799, 0.874454, 0.846633, 1)
+albedo_texture = ExtResource("3_rjrcw")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_wbqsl"]
+points = PackedVector3Array(2.50061, -2.71973, -8.4604, 4.24995, 6.61254, -8.46041, 4.67772, 6.43583, -7.88163, 7.2706, 1.22599, -11.2031, 0.777347, 2.66803, -12.5015, 2.50297, 1.8026, -3.952, -1.09781, 2.95624, -7.45133, 7.10858, 0.942493, -5.87778, 1.36408, -0.782478, -11.9098, 4.96583, 3.82762, -12.6561, -0.527605, -0.655389, -7.88294, 1.20758, 6.13714, -8.31777, 5.82461, -1.94436, -9.75694, 3.95211, -1.51973, -5.42891, 7.27752, 4.54772, -9.32749, 4.8132, 4.67906, -5.00977, 4.09912, 0.209402, -12.9512, 1.79856, 5.24374, -5.59587, 1.36184, 5.25441, -11.3377, -0.967992, 2.67036, -10.3426, 0.504001, -0.493492, -5.7348, 7.72036, 0.209435, -7.88231, 7.4298, 3.68413, -6.86807, 5.25033, 1.65899, -4.27594, 4.24128, 5.98839, -10.9155, 0.0536854, 2.52375, -5.28448, 5.67726, -1.9395, -7.16631, 4.52737, -1.51101, -11.63, -0.211056, -0.491687, -10.4705, -0.527532, 4.54844, -7.88295, 2.65063, 3.68449, -12.951, 8.02838, 2.8184, -8.4608)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6pnfx"]
+albedo_color = Color(0.917647, 0.0980392, 0.0705882, 1)
+metallic = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mv208"]
+albedo_color = Color(0.054902, 0.317647, 1, 1)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_n4dqc"]
+points = PackedVector3Array(-10.8775, -0.99613, 3.61521, 6.6602, 2.86332, 6.77229, 6.6602, 2.86332, 6.42137, 1.04725, -5.20502, 6.77229, -12.9829, -2.74908, 5.71955, -15.0883, 0.758467, 4.31741, -7.02054, -5.5561, 5.01886, -9.47319, 1.8109, 3.2643, -10.8775, -5.20502, 6.42137, 2.80103, -2.39799, 6.07008, -13.6862, -3.45125, 4.66795, 0.341788, -5.20502, 7.1232, -8.77431, -3.10016, 3.96612, 5.6075, 2.86332, 6.77229, 5.95694, 2.16116, 6.07008, -15.7916, -0.293962, 3.96612, -15.44, 0.0562983, 4.66795, -11.2292, 1.8109, 3.96612, 4.5548, -1.69583, 6.77229, -9.47319, 1.10873, 3.2643, 2.09776, -3.10016, 7.1232, 2.09776, 2.86332, 6.07008, 0.695619, -5.20502, 6.42137, -11.9324, 1.45981, 3.2643, -10.8775, -4.85394, 6.42137, -7.37218, 2.16116, 3.61521, -14.7389, -2.04691, 5.01886, 4.5548, -1.69583, 6.42137, -14.0356, 0.758467, 4.66795, 4.20317, 2.86332, 5.71955, -7.71941, -5.5561, 5.01886, -11.9324, -4.85394, 6.07008)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jqalj"]
+albedo_color = Color(0, 0.160784, 0.741176, 1)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_go7m4"]
+points = PackedVector3Array(-16.8952, 20.4497, 4.93377, 0.181727, 21.8443, 6.32847, 0.880527, 25.6768, 9.81342, -11.3157, 28.1177, 7.02556, 5.41399, 21.8443, 9.11582, -15.8492, 21.496, 4.58471, -0.512705, 25.3285, 7.02556, 0.880527, 20.4497, 6.32847, -11.6629, 27.0706, 7.37257, 3.32196, 25.6768, 9.11582, -0.862104, 27.0706, 9.81342, -14.4516, 25.3285, 5.63086, -2.60692, 28.1177, 7.72163, 5.06241, 22.5416, 8.41821, 2.97038, 21.496, 8.76727, -16.1942, 20.7987, 5.28231, -2.25752, 27.7679, 9.46437, -6.78225, 20.4497, 6.32847, -14.8032, 20.4497, 4.58471, -14.4516, 25.3285, 6.32847, -13.7571, 25.3285, 5.63086, -10.2719, 28.1177, 7.72163, 3.32196, 23.2381, 9.46437, 2.62534, 25.3285, 9.81342, 0.315674, 27.1521, 9.59039, -16.8952, 21.147, 4.58471, -15.8492, 22.1925, 5.63086, -9.57308, 28.1177, 7.02556, 0.880527, 21.147, 6.32847, -15.4976, 20.4497, 5.28231, 5.06241, 21.496, 8.41821, -5.04617, 21.147, 5.63086)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_64hs3"]
+albedo_color = Color(0.183036, 0.340868, 1, 1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dmox3"]
+radius = 3.71966
+height = 22.3066
+
+[sub_resource type="Animation" id="Animation_4hr3l"]
+resource_name = "Alive"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 9.96667),
+"transitions": PackedFloat32Array(1, 0.466517),
+"update": 0,
+"values": [Vector3(0, 3.14159, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 9.96667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, -200, 0), Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Boss/eyeLidUp:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 9.8, 9.96667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(14.9465, -16.4128, -24.3627), Vector3(14.9465, -16.4128, -24.3627), Vector3(14.7509, -12.3648, -24.3693)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Boss/eyeLidDown:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 9.8, 9.96667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(14.146, 3.74285, -24.3693), Vector3(14.146, 3.74285, -24.3693), Vector3(14.146, -1.49549, -24.3693)]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(9.96667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"combat"
+}]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(9.96667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"invincible_off"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_c8fox"]
+resource_name = "Hook1"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Boss/Hand:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.766667, 1.13333, 1.43333, 2.23333, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-22.7196, -4.55022, -24.2379), Vector3(-25.5506, 13.5253, -7.07508), Vector3(-20, 0, -60), Vector3(0, 0, -60), Vector3(72.769, -1.391, -50), Vector3(-22.7196, -4.55022, -24.2379)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Boss/Hand:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.766667, 1.43333, 2.23333, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.205949, 0.205949, 0.411898), Vector3(0.608998, 0.596685, 0.49813), Vector3(-0.0750492, -0.0226893, -0.349066), Vector3(-0.088654, -0.718634, -0.084627), Vector3(-0.205949, 0.205949, 0.411898)]
+}
+
+[sub_resource type="Animation" id="Animation_sbks6"]
+resource_name = "Hook2"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Boss/Hand:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7, 0.8, 1.2, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-22.7196, -4.55022, -24.2379), Vector3(-10.6846, 26.9021, -6.09126), Vector3(-10.685, 26.902, -60), Vector3(-10.4929, -52.7437, -101.984), Vector3(-22.7196, -4.55022, -24.2379)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Boss/Hand:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.7, 0.8, 1.2, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.205949, 0.205949, 0.411898), Vector3(0.4667, 0.293951, -1.43321), Vector3(0.4667, 0.293951, -1.43321), Vector3(-0.300184, 0.193525, -1.44223), Vector3(-0.205949, 0.205949, 0.411898)]
+}
+
+[sub_resource type="Animation" id="Animation_w2u2m"]
+resource_name = "Hook3"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Boss/Hand:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7, 1, 1.6, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-22.7196, -4.55022, -24.2379), Vector3(30.9351, 21.8387, -19.3863), Vector3(15, 24.268, -60.226), Vector3(11.5422, -47.5235, -53.5578), Vector3(-22.7196, -4.55022, -24.2379)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Boss/Hand:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.7, 1, 1.6, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.205949, 0.205949, 0.411898), Vector3(0.270274, 0.0648525, -1.86408), Vector3(-0.0473845, 0.159066, -1.85346), Vector3(-0.0473845, 0.159066, -1.85346), Vector3(-0.205949, 0.205949, 0.411898)]
+}
+
+[sub_resource type="Animation" id="Animation_o13sp"]
+resource_name = "Idle"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 1.815, 0), Vector3(0, 0, 0), Vector3(0, -2, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Boss/eyeLidUp:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(14.7509, -12.3648, -24.3693), Vector3(16.5408, -13.7762, -26.4227), Vector3(14.7509, -12.3648, -24.3693), Vector3(16.5408, -13.7762, -26.4227), Vector3(14.7509, -12.3648, -24.3693)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Boss/eyeLidDown:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(14.146, -1.49549, -24.3693), Vector3(14.146, -2.33024, -24.3693), Vector3(14.146, -1.49549, -24.3693), Vector3(14.146, -2.33024, -24.3693), Vector3(14.146, -1.49549, -24.3693)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Boss/Hand:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-22.7196, -4.55022, -24.2379), Vector3(-22.7196, -8.72394, -24.2379), Vector3(-22.7196, -4.55022, -24.2379), Vector3(-22.72, -2.035, -24.238), Vector3(-22.7196, -4.55022, -24.2379)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Boss/Hand:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-0.205949, 0.205949, 0.411898), Vector3(0.0680678, 0.34383, 0.274017), Vector3(0.445059, 0.58294, 0.136136), Vector3(0, 0, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Boss/Eyebrow:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(3.67392, 8.90039, -19.0145), Vector3(3.674, 7.74, -22.014), Vector3(3.67397, 8.1268, -21.0142), Vector3(3.67394, 6.63542, -20.0143), Vector3(3.67392, 8.90039, -19.0145)]
+}
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath(".")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"attack"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_ttaf5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Boss/eyeLidUp:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(16.5408, -13.7762, -26.4227)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Boss/eyeLidDown:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(14.146, -1.49549, -24.3693)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Boss/Hand:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-22.7196, -4.55022, -24.2379)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Boss/Hand:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.205949, 0.205949, 0.411898)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Boss/Eyebrow:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(3.674, 7.74, -22.014)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath(".:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 3.14159, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g230y"]
+_data = {
+"Alive": SubResource("Animation_4hr3l"),
+"Hook1": SubResource("Animation_c8fox"),
+"Hook2": SubResource("Animation_sbks6"),
+"Hook3": SubResource("Animation_w2u2m"),
+"Idle": SubResource("Animation_o13sp"),
+"RESET": SubResource("Animation_ttaf5")
+}
+
+[node name="Boss" type="Area3D" groups=["Enemy"]]
+transform = Transform3D(-2, 0, 5.07036e-06, 0, 2, 0, -5.07036e-06, 0, -2, 0, 0, 0)
+script = ExtResource("1_ab5d6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(5.70555, 0, 0, 0, 5.70555, 0, 0, 0, 5.70555, 3.31984, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_n5wqv")
+
+[node name="Boss" parent="." instance=ExtResource("1_souxo")]
+
+[node name="Head" parent="Boss" index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_rm5f1")
+
+[node name="Eye" parent="Boss" index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_5hqoq")
+
+[node name="Eye" type="Area3D" parent="Boss/Eye" index="0" groups=["Enemy"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.42353, -1.92245, 7.44621)
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("3_nicj1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Boss/Eye/Eye"]
+shape = SubResource("ConvexPolygonShape3D_wbqsl")
+
+[node name="Marker3D" type="Marker3D" parent="Boss/Eye" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8.60133)
+
+[node name="Eyebrow" parent="Boss" index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.674, 7.74, -22.014)
+surface_material_override/0 = SubResource("StandardMaterial3D_6pnfx")
+
+[node name="eyeLidDown" parent="Boss" index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.146, -1.49549, -24.3693)
+surface_material_override/0 = SubResource("StandardMaterial3D_mv208")
+
+[node name="EyeLid" type="Area3D" parent="Boss/eyeLidDown" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.146, 1.49549, 24.3693)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Boss/eyeLidDown/EyeLid"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.146, -1.49549, -24.3693)
+shape = SubResource("ConvexPolygonShape3D_n4dqc")
+
+[node name="eyeLidUp" parent="Boss" index="5"]
+transform = Transform3D(0.998829, -0.0482645, -0.00347602, 0.0482698, 0.998833, 0.00145944, 0.00340153, -0.00162552, 0.999993, 16.5408, -13.7762, -26.4227)
+surface_material_override/0 = SubResource("StandardMaterial3D_jqalj")
+
+[node name="Area3D" type="Area3D" parent="Boss/eyeLidUp" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Boss/eyeLidUp/Area3D"]
+transform = Transform3D(1, 2.80397e-09, -2.32831e-10, -9.21318e-10, 1, 0, -2.32831e-10, 1.16415e-10, 1, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_go7m4")
+
+[node name="Hand" parent="Boss" index="6"]
+transform = Transform3D(0.880255, -0.43021, 0.200175, 0.391889, 0.896997, 0.204496, -0.267532, -0.101563, 0.958181, -22.7196, -4.55022, -24.2379)
+surface_material_override/0 = SubResource("StandardMaterial3D_64hs3")
+
+[node name="HookCol" type="Area3D" parent="Boss/Hand" index="0"]
+collision_layer = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Boss/Hand/HookCol"]
+transform = Transform3D(1, -2.98023e-08, 0, -2.42144e-08, 0.128796, -0.991671, 0, 0.991671, 0.128796, -2.84189, 1.11526, -11.1003)
+shape = SubResource("CapsuleShape3D_dmox3")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Boss/Hand/HookCol"]
+transform = Transform3D(0.497504, -0.867462, 0, 0.111725, 0.0640764, -0.991671, 0.860237, 0.49336, 0.128796, -0.452424, 0.861681, -22.6899)
+shape = SubResource("CapsuleShape3D_dmox3")
+
+[node name="TurretSpawn" type="Marker3D" parent="Boss/Turret" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.0233, 16.4753, 15.2412)
+
+[node name="Aim" type="Marker3D" parent="Boss/Turret/TurretSpawn"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.72876)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_g230y")
+}
+
+[connection signal="take_hit" from="Boss/Eye/Eye" to="." method="_on_eye_take_hit"]
+[connection signal="area_entered" from="Boss/Hand/HookCol" to="." method="_on_hook_col_area_entered"]
+[connection signal="body_entered" from="Boss/Hand/HookCol" to="." method="_on_hook_col_body_entered"]
+
+[editable path="Boss"]

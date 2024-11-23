@@ -7,47 +7,46 @@ var life = 30
 @onready var fire_timer = $Timer/FireTimer
 @onready var aim = $Aim
 @onready var target = $Aim/Target
+@onready var animation_player = $AnimationPlayer
+
+@export var spawn_place_relative: Vector3 = Vector3(-20, 20, 0)
+var start_pos: Vector3
 
 var alive = false
 
 signal enemy_fire(pos, rot)
 
 func _ready():
-	
+	start_pos = global_position
 	connect("enemy_fire", Global.Wrold._on_enemy_enemy_fire)
-
 	visible = false
 	cpu_particles_3d.emitting = false
 	cpu_particles_3d_2.emitting = false
 
 func hit(dmg):
-	$HitFlashAnim.play("hit_flash")
-	life = life - dmg
-	if life < 30:
-		cpu_particles_3d.emitting = true
-	if life < 20:
-		cpu_particles_3d_2.emitting = true
-	if life <= 0:
-		alive = false
-		if "reset_enemy_pos" in get_parent():
-			get_parent().reset_enemy_pos()
-		life = 30
-		cpu_particles_3d.emitting = false
-		cpu_particles_3d_2.emitting = false
-		fire_timer.stop()
-		visible = false
+	if alive:
+		animation_player.play("hit_flash")
+		life = life - dmg
+		if life < 30:
+			cpu_particles_3d.emitting = true
+		if life < 20:
+			cpu_particles_3d_2.emitting = true
+		if life <= 0:
+			queue_free()
 
-func _process(delta):
-
-	rotation_degrees.z -= global_rotation_degrees.z * delta /0.5
-	aim.look_at(Global.fox_position)
-	
 func activate_enemy():
-	alive = true
+	global_position = start_pos + spawn_place_relative
+	rotation_degrees.z = -360
 	visible = true
-	await get_tree().create_timer(randf_range(2,4)).timeout
+	alive = true
+	var tween = get_tree().create_tween()
+	tween.set_parallel()
+	tween.tween_property(self, "global_position", start_pos, 2)
+	tween.tween_property(self, "rotation_degrees", Vector3.ZERO, 2)
+	await get_tree().create_timer(randf_range(2,3)).timeout
 	fire_timer.start()
 
 func _on_fire_timer_timeout():
 	var fire_rotation = target.global_transform.basis
 	enemy_fire.emit(marker_3d.global_position, fire_rotation)
+	

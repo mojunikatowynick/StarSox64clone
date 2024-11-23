@@ -14,7 +14,7 @@ default_input_values = [0, 0.0, 1, 1.0, 2, 1e-05, 3, Vector3(0, 0, 0), 4, Vector
 [sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_3llon"]
 parameter_name = "ColorParameter"
 default_value_enabled = true
-default_value = Color(0.713726, 0, 0, 1)
+default_value = Color(0.0648192, 0.0241905, 0.00480354, 1)
 
 [resource]
 code = "shader_type spatial;
@@ -22,7 +22,7 @@ render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_s
 
 uniform bool Enabled = false;
 uniform vec4 Tint : source_color = vec4(1.000000, 1.000000, 1.000000, 1.000000);
-uniform vec4 ColorParameter : source_color = vec4(0.713726, 0.000000, 0.000000, 1.000000);
+uniform vec4 ColorParameter : source_color = vec4(0.064819, 0.024191, 0.004804, 1.000000);
 
 
 
@@ -73,4 +73,4 @@ nodes/fragment/4/node = SubResource("VisualShaderNodeIf_j5fnj")
 nodes/fragment/4/position = Vector2(280, 180)
 nodes/fragment/5/node = SubResource("VisualShaderNodeColorParameter_3llon")
 nodes/fragment/5/position = Vector2(-80, 520)
-nodes/fragment/connections = PackedInt32Array(3, 0, 4, 0, 2, 0, 4, 3, 5, 0, 4, 4, 5, 0, 4, 5, 4, 0, 0, 0, 5, 0, 0, 2)
+nodes/fragment/connections = PackedInt32Array(3, 0, 4, 0, 2, 0, 4, 3, 5, 0, 4, 4, 5, 0, 4, 5, 5, 0, 0, 2, 4, 0, 0, 0)

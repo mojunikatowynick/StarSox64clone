@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://bhyhsvivo3vqy"]
+[gd_scene load_steps=34 format=3 uid="uid://bhyhsvivo3vqy"]
 
 [ext_resource type="Script" path="res://scenes/world.gd" id="1_y0ffe"]
 [ext_resource type="Script" path="res://scenes/enemy_rails.gd" id="4_5e84b"]
@@ -9,8 +9,12 @@
 [ext_resource type="PackedScene" uid="uid://6eteo6lwxx76" path="res://Graphics/Enviroment/StartingZone.blend" id="5_l7geb"]
 [ext_resource type="PackedScene" uid="uid://bklwd82tkqhx3" path="res://scenes/UI/ui.tscn" id="6_nxcbx"]
 [ext_resource type="PackedScene" uid="uid://tirgf5vs5wth" path="res://scenes/Enviroment/asteroid.tscn" id="6_uo170"]
+[ext_resource type="Shader" uid="uid://hmufp7ysukj4" path="res://scenes/Shaders/enemy_hit_flash.tres" id="7_2mii3"]
 [ext_resource type="Script" path="res://scenes/a_1.gd" id="7_xfj2a"]
 [ext_resource type="PackedScene" uid="uid://cmd2yxq3pq2t3" path="res://scenes/enemy.tscn" id="9_fte75"]
+[ext_resource type="Texture2D" uid="uid://dvukf8pohr2dr" path="res://icon.svg" id="12_km5b7"]
+[ext_resource type="PackedScene" uid="uid://jmsnxtjlkfgl" path="res://scenes/fly_enemy.tscn" id="14_0ayvv"]
+[ext_resource type="PackedScene" uid="uid://cayibpbna6tui" path="res://scenes/boss.tscn" id="15_2tkmj"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_dqywx"]
 sky_top_color = Color(0.225408, 0.603492, 0.701855, 1)
@@ -43,43 +47,52 @@ func _process(delta: float) -> void:
 "
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_eterp"]
-size = Vector3(1500, 1500, 5)
+size = Vector3(5000, 5000, 5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tuoul"]
 size = Vector3(1500, 1500, 1)
 
 [sub_resource type="Curve3D" id="Curve3D_d6xie"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -70, 0, -15, 0, 0, 0, 0, 0, 0, -15, 0, 70),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -70, 0, -15, 0, 0, 0, 0, 0, 0, -20, 0, 60),
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
 
 [sub_resource type="Curve3D" id="Curve3D_3f067"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 70, 0, -15, 0, 0, 0, 0, 0, 0, 15, 0, 70),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 70, 0, -15, 0, 0, 0, 0, 0, 0, 20, 0, 60),
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
 
 [sub_resource type="Curve3D" id="Curve3D_nhbjq"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, -70, -15, 0, 0, 0, 0, 0, 0, 0, -15, 70),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, -70, -15, 0, 0, 0, 0, 0, 0, 0, -20, 60),
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
 
 [sub_resource type="Curve3D" id="Curve3D_7knog"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 70, -15, 0, 0, 0, 0, 0, 0, 0, 15, 70),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 70, -15, 0, 0, 0, 0, 0, 0, 0, 20, 60),
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_caw3w"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("7_2mii3")
+shader_parameter/Enabled = false
+shader_parameter/Tint = Color(1, 1, 1, 1)
+shader_parameter/ColorParameter = Color(0.837424, 0, 0.122433, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_oo83l"]
 size = Vector3(20, 20, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_51jk0"]
+size = Vector3(300, 300, 50)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ped6d"]
 size = Vector3(5000, 5000, 10)
@@ -225,7 +238,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0.466667),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, 0, -50)]
+"values": [Vector3(0, 0, -55)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -317,13 +330,14 @@ current = true
 [node name="Trigger" type="Node3D" parent="Level1/Path3D/PathFollow3D/RailCart"]
 
 [node name="Trigger" type="Area3D" parent="Level1/Path3D/PathFollow3D/RailCart/Trigger" groups=["Trigger"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 500)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -7.45058e-08, 1095.59)
+collision_mask = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Level1/Path3D/PathFollow3D/RailCart/Trigger/Trigger"]
 shape = SubResource("BoxShape3D_eterp")
 
 [node name="TriggerPassed" type="Area3D" parent="Level1/Path3D/PathFollow3D/RailCart/Trigger" groups=["TriggerDissapear"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.72529e-09, -81.3438)
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Level1/Path3D/PathFollow3D/RailCart/Trigger/TriggerPassed"]
 shape = SubResource("BoxShape3D_tuoul")
@@ -375,6 +389,9 @@ script = ExtResource("4_8kqow")
 
 [node name="Enemy" parent="Level1/Path3D/PathFollow3D/RailCart/EnemyRails/Path3D4/PathFollow3D" instance=ExtResource("9_fte75")]
 
+[node name="Cube" parent="Level1/Path3D/PathFollow3D/RailCart/EnemyRails/Path3D4/PathFollow3D/Enemy/Enemy1" index="0"]
+surface_material_override/0 = SubResource("ShaderMaterial_caw3w")
+
 [node name="Enviroment" type="Node3D" parent="."]
 
 [node name="StartingZone" parent="Enviroment" instance=ExtResource("5_l7geb")]
@@ -401,131 +418,125 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, -10, 1952.57)
 [node name="Collisions" type="Node3D" parent="Enviroment"]
 
 [node name="Asteroids1" type="Node3D" parent="Enviroment/Collisions"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2383.73)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2236.95)
 
 [node name="TriggerAsteroids" type="Area3D" parent="Enviroment/Collisions/Asteroids1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1366.34)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 670.059)
+collision_layer = 16
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Enviroment/Collisions/Asteroids1/TriggerAsteroids"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -298.465)
 shape = SubResource("BoxShape3D_51jk0")
 
 [node name="A1" type="Node3D" parent="Enviroment/Collisions/Asteroids1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 271.214, 713.99, 952.683)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 76.257, 174.711, 830.419)
 script = ExtResource("7_xfj2a")
 change_angle = 10
 
 [node name="Asteroid" parent="Enviroment/Collisions/Asteroids1/A1" instance=ExtResource("6_uo170")]
-transform = Transform3D(12, 0, 0, 0, 12, 0, 0, 0, 12, 0, 130.163, 166.418)
-
-[node name="A10" type="Node3D" parent="Enviroment/Collisions/Asteroids1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 271.214, 1022.63, 1686.86)
-script = ExtResource("7_xfj2a")
-change_angle = 10
-
-[node name="Asteroid" parent="Enviroment/Collisions/Asteroids1/A10" instance=ExtResource("6_uo170")]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
 
 [node name="A2" type="Node3D" parent="Enviroment/Collisions/Asteroids1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 639.873, 937.392, 1037.49)
-script = ExtResource("7_xfj2a")
-change_angle = 15
-
-[node name="Asteroid" parent="Enviroment/Collisions/Asteroids1/A2" instance=ExtResource("6_uo170")]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
-
-[node name="A9" type="Node3D" parent="Enviroment/Collisions/Asteroids1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 639.873, 1240.91, 278.693)
-script = ExtResource("7_xfj2a")
-change_angle = 15
-
-[node name="Asteroid" parent="Enviroment/Collisions/Asteroids1/A9" instance=ExtResource("6_uo170")]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
-
-[node name="A4" type="Node3D" parent="Enviroment/Collisions/Asteroids1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -235.323, 937.392, 1037.49)
-script = ExtResource("7_xfj2a")
-change_angle = -1
-
-[node name="Asteroid" parent="Enviroment/Collisions/Asteroids1/A4" instance=ExtResource("6_uo170")]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
-
-[node name="A11" type="Node3D" parent="Enviroment/Collisions/Asteroids1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 271.214, 1229.74, 2207.01)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 104.647, 174.711, 775.802)
 script = ExtResource("7_xfj2a")
 change_angle = 10
 
-[node name="Asteroid" parent="Enviroment/Collisions/Asteroids1/A11" instance=ExtResource("6_uo170")]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
+[node name="Asteroid" parent="Enviroment/Collisions/Asteroids1/A2" instance=ExtResource("6_uo170")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
 
-[node name="A12" type="Node3D" parent="Enviroment/Collisions/Asteroids1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 639.873, 1144.5, 1557.65)
+[node name="A3" type="Node3D" parent="Enviroment/Collisions/Asteroids1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 112.182, 182.19, 817.923)
 script = ExtResource("7_xfj2a")
-change_angle = 15
+change_angle = 10
 
-[node name="Asteroid" parent="Enviroment/Collisions/Asteroids1/A12" instance=ExtResource("6_uo170")]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
+[node name="Asteroid" parent="Enviroment/Collisions/Asteroids1/A3" instance=ExtResource("6_uo170")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 19.3603, 0)
 
-[node name="A13" type="Node3D" parent="Enviroment/Collisions/Asteroids1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 639.873, 1448.02, 798.848)
+[node name="A4" type="Node3D" parent="Enviroment/Collisions/Asteroids1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 51.2359, 143.701, 817.923)
 script = ExtResource("7_xfj2a")
-change_angle = 15
+change_angle = 4
 
-[node name="Asteroid" parent="Enviroment/Collisions/Asteroids1/A13" instance=ExtResource("6_uo170")]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
-
-[node name="A14" type="Node3D" parent="Enviroment/Collisions/Asteroids1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -235.323, 1144.5, 1557.65)
-script = ExtResource("7_xfj2a")
-change_angle = -1
-
-[node name="Asteroid" parent="Enviroment/Collisions/Asteroids1/A14" instance=ExtResource("6_uo170")]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
+[node name="Asteroid" parent="Enviroment/Collisions/Asteroids1/A4" instance=ExtResource("6_uo170")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 19.3603, 0)
 
 [node name="A5" type="Node3D" parent="Enviroment/Collisions/Asteroids1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -402.597, 1202.08, 1412.07)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.3392, 143.701, 920.56)
+script = ExtResource("7_xfj2a")
+change_angle = 2
+
+[node name="Asteroid" parent="Enviroment/Collisions/Asteroids1/A5" instance=ExtResource("6_uo170")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 19.3603, 0)
+
+[node name="A6" type="Node3D" parent="Enviroment/Collisions/Asteroids1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.3799, 143.701, 857.853)
 script = ExtResource("7_xfj2a")
 change_angle = -2
 
-[node name="Asteroid" parent="Enviroment/Collisions/Asteroids1/A5" instance=ExtResource("6_uo170")]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
-
-[node name="A6" type="Node3D" parent="Enviroment/Collisions/Asteroids1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -718.59, 1446.16, 1783.76)
-script = ExtResource("7_xfj2a")
-change_angle = -15
-
 [node name="Asteroid" parent="Enviroment/Collisions/Asteroids1/A6" instance=ExtResource("6_uo170")]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 19.3603, 0)
 
-[node name="A7" type="Node3D" parent="Enviroment/Collisions/Asteroids1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -994.837, 1446.16, 1633.6)
+[node name="Asteroids2" type="Node3D" parent="Enviroment/Collisions"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4134.01)
+
+[node name="TriggerAsteroids2" type="Area3D" parent="Enviroment/Collisions/Asteroids2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 670.059)
+collision_layer = 16
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enviroment/Collisions/Asteroids2/TriggerAsteroids2"]
+shape = SubResource("BoxShape3D_51jk0")
+
+[node name="A1" type="Node3D" parent="Enviroment/Collisions/Asteroids2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 76.257, 174.711, 830.419)
 script = ExtResource("7_xfj2a")
-change_angle = -23
+change_angle = 10
 
-[node name="Asteroid" parent="Enviroment/Collisions/Asteroids1/A7" instance=ExtResource("6_uo170")]
-transform = Transform3D(13, 0, 0, 0, 13, 0, 0, 0, 13, 0, 0, 0)
+[node name="Asteroid" parent="Enviroment/Collisions/Asteroids2/A1" instance=ExtResource("6_uo170")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
 
-[node name="A8" type="Node3D" parent="Enviroment/Collisions/Asteroids1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -994.837, 1446.16, 1314.18)
+[node name="A2" type="Node3D" parent="Enviroment/Collisions/Asteroids2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 104.647, 174.711, 775.802)
 script = ExtResource("7_xfj2a")
-change_angle = -14
+change_angle = 10
 
-[node name="Asteroid" parent="Enviroment/Collisions/Asteroids1/A8" instance=ExtResource("6_uo170")]
-transform = Transform3D(13, 0, 0, 0, 13, 0, 0, 0, 13, 0, 0, 0)
+[node name="Asteroid" parent="Enviroment/Collisions/Asteroids2/A2" instance=ExtResource("6_uo170")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
 
-[node name="A3" type="Node3D" parent="Enviroment/Collisions/Asteroids1"]
-transform = Transform3D(1, 0, 0, 0, 0.999882, -0.0153583, 0, 0.0153583, 0.999882, 623.463, 1130.91, 1327.26)
+[node name="A3" type="Node3D" parent="Enviroment/Collisions/Asteroids2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 112.182, 182.19, 817.923)
 script = ExtResource("7_xfj2a")
-change_angle = 20
+change_angle = 10
 
-[node name="Asteroid" parent="Enviroment/Collisions/Asteroids1/A3" instance=ExtResource("6_uo170")]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
+[node name="Asteroid" parent="Enviroment/Collisions/Asteroids2/A3" instance=ExtResource("6_uo170")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 19.3603, 0)
+
+[node name="A4" type="Node3D" parent="Enviroment/Collisions/Asteroids2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 51.2359, 143.701, 817.923)
+script = ExtResource("7_xfj2a")
+change_angle = 4
+
+[node name="Asteroid" parent="Enviroment/Collisions/Asteroids2/A4" instance=ExtResource("6_uo170")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 19.3603, 0)
+
+[node name="A5" type="Node3D" parent="Enviroment/Collisions/Asteroids2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.3392, 143.701, 920.56)
+script = ExtResource("7_xfj2a")
+change_angle = 2
+
+[node name="Asteroid" parent="Enviroment/Collisions/Asteroids2/A5" instance=ExtResource("6_uo170")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 19.3603, 0)
+
+[node name="A6" type="Node3D" parent="Enviroment/Collisions/Asteroids2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.3799, 143.701, 857.853)
+script = ExtResource("7_xfj2a")
+change_angle = -2
+
+[node name="Asteroid" parent="Enviroment/Collisions/Asteroids2/A6" instance=ExtResource("6_uo170")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 19.3603, 0)
 
 [node name="Triggers" type="Node3D" parent="Enviroment"]
 
 [node name="Enemy_activate_back1" type="Area3D" parent="Enviroment/Triggers"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5000)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 755.049)
 collision_layer = 16
 collision_mask = 2
 
@@ -533,7 +544,7 @@ collision_mask = 2
 shape = SubResource("BoxShape3D_ped6d")
 
 [node name="Enemy_activate_back2" type="Area3D" parent="Enviroment/Triggers"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8000)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8254.72)
 collision_layer = 16
 collision_mask = 2
 
@@ -564,13 +575,52 @@ modulate = Color(0, 0, 0, 0)
 wait_time = 5.0
 one_shot = true
 
+[node name="edges" type="Node3D" parent="."]
+visible = false
+
+[node name="Sprite3D" type="Sprite3D" parent="edges"]
+transform = Transform3D(-0.000437114, 0, 200, 0, 200, 0, -10000, 0, -8.74228e-06, 55, 0, 0)
+modulate = Color(1, 1, 1, 0.247059)
+texture = ExtResource("12_km5b7")
+
+[node name="Sprite3D2" type="Sprite3D" parent="edges"]
+transform = Transform3D(-0.000437114, 0, 200, 0, 200, 0, -10000, 0, -8.74228e-06, -55, 0, 0)
+modulate = Color(1, 1, 1, 0.247059)
+texture = ExtResource("12_km5b7")
+
+[node name="Sprite3D3" type="Sprite3D" parent="edges"]
+transform = Transform3D(-0.000437114, 200, -8.74228e-06, 0, -8.74228e-06, -200, -10000, -8.74228e-06, 3.82137e-13, 0, 35, 0)
+modulate = Color(1, 1, 1, 0.247059)
+texture = ExtResource("12_km5b7")
+
+[node name="Sprite3D4" type="Sprite3D" parent="edges"]
+transform = Transform3D(-0.000437114, 200, -8.74228e-06, 0, -8.74228e-06, -200, -10000, -8.74228e-06, 3.82137e-13, 0, -35, 0)
+modulate = Color(1, 1, 1, 0.247059)
+texture = ExtResource("12_km5b7")
+
+[node name="FlyEnemy2" parent="." instance=ExtResource("14_0ayvv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 38, 2390)
+
+[node name="FlyEnemy3" parent="." instance=ExtResource("14_0ayvv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -75, 38, 2568)
+
+[node name="EnemyHandler" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1150)
+
+[node name="Boss" parent="EnemyHandler" instance=ExtResource("15_2tkmj")]
+transform = Transform3D(-2, 0, 5.07036e-06, 0, 2, 0, -5.07036e-06, 0, -2, 0, 0, 0)
+
 [connection signal="fire" from="Level1/Path3D/PathFollow3D/RailCart/Fox" to="." method="_on_fox_fire"]
+[connection signal="area_entered" from="Level1/Path3D/PathFollow3D/RailCart/Trigger/Trigger" to="." method="_on_trigger_area_entered"]
 [connection signal="body_entered" from="Enviroment/StartingZone/GameStart" to="." method="_on_game_start_body_entered"]
-[connection signal="area_entered" from="Enviroment/Collisions/Asteroids1/TriggerAsteroids" to="." method="_on_trigger_asteroids_area_entered"]
+[connection signal="body_entered" from="Enviroment/Collisions/Asteroids1/TriggerAsteroids" to="." method="_on_trigger_asteroids_body_entered"]
+[connection signal="body_entered" from="Enviroment/Collisions/Asteroids2/TriggerAsteroids2" to="." method="_on_trigger_asteroids_2_body_entered"]
 [connection signal="area_entered" from="Enviroment/Triggers/Enemy_activate_back1" to="." method="_on_area_3d_area_entered"]
 [connection signal="area_entered" from="Enviroment/Triggers/Enemy_activate_back2" to="." method="_on_area_3d_area_entered"]
 [connection signal="timeout" from="Timers/CanBoostTimer" to="." method="_on_can_boost_timer_timeout"]
 
 [editable path="Level1"]
 [editable path="Level1/Path3D/PathFollow3D/RailCart"]
+[editable path="Level1/Path3D/PathFollow3D/RailCart/EnemyRails/Path3D4/PathFollow3D/Enemy"]
+[editable path="Level1/Path3D/PathFollow3D/RailCart/EnemyRails/Path3D4/PathFollow3D/Enemy/Enemy1"]
 [editable path="UI"]

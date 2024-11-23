@@ -19,6 +19,7 @@ func _on_life_timer_timeout():
 	queue_free()
 
 func _on_area_entered(area):
-	if "hit" in area and area.is_in_group("Enemy"):
-		area.hit(dmg)
+	if area.is_in_group("Enemy"):
+		if "hit" in area:
+			area.hit(dmg)
 		queue_free()

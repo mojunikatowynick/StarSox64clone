@@ -1,4 +1,10 @@
 extends Node
+#############################################
+#############################################
+######## zmien path 3d na 10 000 ############
+#############################################
+#############################################
+
 
 #preloads
 #projectiles
@@ -13,6 +19,7 @@ const ENEM_BULLET = preload("res://scenes/enem_bullet.tscn")
 @onready var animation_player = $Animation/AnimationPlayer
 @onready var can_boost_timer = $Timers/CanBoostTimer
 @onready var asteroids_1 = $Enviroment/Collisions/Asteroids1
+@onready var asteroids_2 = $Enviroment/Collisions/Asteroids2
 
 
 var flying: bool = false
@@ -57,12 +64,6 @@ func _process(delta):
 		fox_camera.rotation.z = fox.velocity.x / 15 * delta
 		fox_camera.rotation.x = fox.velocity.y / 15 * delta
 
-func _on_fox_fire(pos, rot):
-	var projectile = F_BULLET.instantiate() as Area3D
-	bullets.add_child(projectile)
-	projectile.global_position = pos
-	projectile.global_basis = rot
-
 func _on_game_start_body_entered(body):
 	if body.is_in_group("Fox"):
 		fox.cinematic = false
@@ -71,21 +72,37 @@ func _on_game_start_body_entered(body):
 func _on_can_boost_timer_timeout():
 	can_boost = true
 
-func _on_trigger_asteroids_area_entered(area):
-	if area.is_in_group("Trigger"):
-		for asteroid in asteroids_1.get_children():
-			if "move_true" in asteroid:
-				asteroid.move_true()
-
-
 func _on_area_3d_area_entered(area):
 	if area.is_in_group("Enemy"):
 		if !area.alive and "activate_enemy" in area:
 			area.activate_enemy()
 
+func _on_fox_fire(pos, rot):
+	var projectile = F_BULLET.instantiate() as Area3D
+	bullets.add_child(projectile)
+	projectile.global_position = pos
+	projectile.global_basis = rot
 
 func _on_enemy_enemy_fire(pos, rot):
 	var enem_projectile = ENEM_BULLET.instantiate() as Area3D
 	bullets.add_child(enem_projectile)
 	enem_projectile.global_position = pos
-	#enem_projectile.global_basis = rot
+	enem_projectile.global_basis = rot
+
+func _on_trigger_asteroids_body_entered(body):
+	if body.is_in_group("Fox"):
+		for asteroid in asteroids_1.get_children():
+			if "move_true" in asteroid:
+				asteroid.move_true()
+
+func _on_trigger_asteroids_2_body_entered(body):
+	if body.is_in_group("Fox"):
+		for asteroid in asteroids_2.get_children():
+			if "move_true" in asteroid:
+				asteroid.move_true()
+
+func _on_trigger_area_entered(area):
+	if area.is_in_group("Enemy"):
+		if "activate_enemy" in area:
+			if !area.alive:
+				area.activate_enemy()
