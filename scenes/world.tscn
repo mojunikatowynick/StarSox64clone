@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://bhyhsvivo3vqy"]
+[gd_scene load_steps=39 format=3 uid="uid://bhyhsvivo3vqy"]
 
 [ext_resource type="Script" path="res://scenes/world.gd" id="1_y0ffe"]
 [ext_resource type="Script" path="res://scenes/enemy_rails.gd" id="4_5e84b"]
@@ -43,7 +43,8 @@ script/source = "extends PathFollow3D
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	progress += prog_speed * delta
+	if Global.fox_life >0:
+		progress += prog_speed * delta
 "
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_eterp"]
@@ -96,6 +97,21 @@ size = Vector3(300, 300, 50)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ped6d"]
 size = Vector3(5000, 5000, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xrccx"]
+size = Vector3(200, 200, 3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nq1rg"]
+size = Vector3(200, 200, 3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_aqpg5"]
+size = Vector3(200, 200, 3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_a6t01"]
+size = Vector3(200, 200, 3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3psxd"]
+size = Vector3(200, 200, 3)
 
 [sub_resource type="Animation" id="Animation_x7trw"]
 resource_name = "Opening_Cinematic"
@@ -161,6 +177,30 @@ tracks/4/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(0, 0, 0, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("UI/ProgressBar:anchor_top")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.1]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("UI/ProgressBar:anchor_bottom")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.1]
+}
 
 [sub_resource type="Animation" id="Animation_10rsl"]
 length = 0.001
@@ -223,6 +263,30 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(0, 0, 0, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("UI/ProgressBar:anchor_bottom")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("UI/ProgressBar:anchor_top")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.902222]
 }
 
 [sub_resource type="Animation" id="Animation_vwrpx"]
@@ -287,6 +351,30 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("UI/ProgressBar:anchor_bottom")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.99]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("UI/ProgressBar:anchor_top")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.99]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_nh02f"]
@@ -409,16 +497,25 @@ shape = SubResource("BoxShape3D_oo83l")
 [node name="Ring" parent="Enviroment/Rings" instance=ExtResource("5_eseqm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, -15, 1465.87)
 
+[node name="Ring6" parent="Enviroment/Rings" instance=ExtResource("5_eseqm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, -15, 7519.43)
+
 [node name="Ring2" parent="Enviroment/Rings" instance=ExtResource("5_eseqm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45, 20, 1696.66)
+
+[node name="Ring5" parent="Enviroment/Rings" instance=ExtResource("5_eseqm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45, 20, 4578.36)
 
 [node name="Ring3" parent="Enviroment/Rings" instance=ExtResource("5_eseqm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, -10, 1952.57)
 
+[node name="Ring4" parent="Enviroment/Rings" instance=ExtResource("5_eseqm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, -10, 5482.55)
+
 [node name="Collisions" type="Node3D" parent="Enviroment"]
 
 [node name="Asteroids1" type="Node3D" parent="Enviroment/Collisions"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2236.95)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2825.98)
 
 [node name="TriggerAsteroids" type="Area3D" parent="Enviroment/Collisions/Asteroids1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 670.059)
@@ -476,7 +573,7 @@ change_angle = -2
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 19.3603, 0)
 
 [node name="Asteroids2" type="Node3D" parent="Enviroment/Collisions"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4134.01)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5703.08)
 
 [node name="TriggerAsteroids2" type="Area3D" parent="Enviroment/Collisions/Asteroids2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 670.059)
@@ -536,7 +633,7 @@ transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 19.3603, 0)
 [node name="Triggers" type="Node3D" parent="Enviroment"]
 
 [node name="Enemy_activate_back1" type="Area3D" parent="Enviroment/Triggers"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 755.049)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4734.71)
 collision_layer = 16
 collision_mask = 2
 
@@ -544,12 +641,44 @@ collision_mask = 2
 shape = SubResource("BoxShape3D_ped6d")
 
 [node name="Enemy_activate_back2" type="Area3D" parent="Enviroment/Triggers"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8254.72)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8250)
 collision_layer = 16
 collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Enviroment/Triggers/Enemy_activate_back2"]
 shape = SubResource("BoxShape3D_ped6d")
+
+[node name="DialogueTriggers" type="Node3D" parent="Enviroment/Triggers"]
+
+[node name="DialogueTwo" type="Area3D" parent="Enviroment/Triggers/DialogueTriggers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 177.682)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enviroment/Triggers/DialogueTriggers/DialogueTwo"]
+shape = SubResource("BoxShape3D_xrccx")
+
+[node name="DialogueThree" type="Area3D" parent="Enviroment/Triggers/DialogueTriggers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1956.29)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enviroment/Triggers/DialogueTriggers/DialogueThree"]
+shape = SubResource("BoxShape3D_nq1rg")
+
+[node name="DialogueFour" type="Area3D" parent="Enviroment/Triggers/DialogueTriggers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3820.96)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enviroment/Triggers/DialogueTriggers/DialogueFour"]
+shape = SubResource("BoxShape3D_aqpg5")
+
+[node name="DialogueFive" type="Area3D" parent="Enviroment/Triggers/DialogueTriggers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5784.17)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enviroment/Triggers/DialogueTriggers/DialogueFive"]
+shape = SubResource("BoxShape3D_a6t01")
+
+[node name="DilogueSix" type="Area3D" parent="Enviroment/Triggers/DialogueTriggers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7078.86)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enviroment/Triggers/DialogueTriggers/DilogueSix"]
+shape = SubResource("BoxShape3D_3psxd")
 
 [node name="Animation" type="Node" parent="."]
 
@@ -561,11 +690,21 @@ libraries = {
 
 [node name="UI" parent="." instance=ExtResource("6_nxcbx")]
 
+[node name="ProgressBar" parent="UI" index="0"]
+custom_minimum_size = Vector2(150, 10)
+anchor_top = 0.902222
+anchor_bottom = 1.0
+offset_top = -27.0
+offset_bottom = 0.0
+
 [node name="CinematicBlackTop" parent="UI/Control" index="0"]
 anchors_preset = -1
 
 [node name="BlackOut" parent="UI/Control" index="2"]
 modulate = Color(0, 0, 0, 0)
+
+[node name="PlayButton" parent="UI/ButtonCntrl" index="0"]
+modulate = Color(1, 1, 1, 0)
 
 [node name="Triggers" type="Node3D" parent="."]
 
@@ -599,16 +738,30 @@ modulate = Color(1, 1, 1, 0.247059)
 texture = ExtResource("12_km5b7")
 
 [node name="FlyEnemy2" parent="." instance=ExtResource("14_0ayvv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 38, 2390)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6490.23)
+
+[node name="FlyEnemy4" parent="." instance=ExtResource("14_0ayvv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5268.27)
+
+[node name="FlyEnemy5" parent="." instance=ExtResource("14_0ayvv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5363.56)
 
 [node name="FlyEnemy3" parent="." instance=ExtResource("14_0ayvv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -75, 38, 2568)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6000)
+
+[node name="FlyEnemy6" parent="." instance=ExtResource("14_0ayvv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7024.32)
+
+[node name="FlyEnemy7" parent="." instance=ExtResource("14_0ayvv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7649.71)
+
+[node name="FlyEnemy8" parent="." instance=ExtResource("14_0ayvv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7384.17)
 
 [node name="EnemyHandler" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1150)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10150)
 
 [node name="Boss" parent="EnemyHandler" instance=ExtResource("15_2tkmj")]
-transform = Transform3D(-2, 0, 5.07036e-06, 0, 2, 0, -5.07036e-06, 0, -2, 0, 0, 0)
 
 [connection signal="fire" from="Level1/Path3D/PathFollow3D/RailCart/Fox" to="." method="_on_fox_fire"]
 [connection signal="area_entered" from="Level1/Path3D/PathFollow3D/RailCart/Trigger/Trigger" to="." method="_on_trigger_area_entered"]
@@ -617,6 +770,11 @@ transform = Transform3D(-2, 0, 5.07036e-06, 0, 2, 0, -5.07036e-06, 0, -2, 0, 0, 
 [connection signal="body_entered" from="Enviroment/Collisions/Asteroids2/TriggerAsteroids2" to="." method="_on_trigger_asteroids_2_body_entered"]
 [connection signal="area_entered" from="Enviroment/Triggers/Enemy_activate_back1" to="." method="_on_area_3d_area_entered"]
 [connection signal="area_entered" from="Enviroment/Triggers/Enemy_activate_back2" to="." method="_on_area_3d_area_entered"]
+[connection signal="body_entered" from="Enviroment/Triggers/DialogueTriggers/DialogueTwo" to="." method="_on_dialogue_two_body_entered"]
+[connection signal="body_entered" from="Enviroment/Triggers/DialogueTriggers/DialogueThree" to="." method="_on_dialogue_three_body_entered"]
+[connection signal="body_entered" from="Enviroment/Triggers/DialogueTriggers/DialogueFour" to="." method="_on_dialogue_four_body_entered"]
+[connection signal="body_entered" from="Enviroment/Triggers/DialogueTriggers/DialogueFive" to="." method="_on_dialogue_five_body_entered"]
+[connection signal="body_entered" from="Enviroment/Triggers/DialogueTriggers/DilogueSix" to="." method="_on_dilogue_six_body_entered"]
 [connection signal="timeout" from="Timers/CanBoostTimer" to="." method="_on_can_boost_timer_timeout"]
 
 [editable path="Level1"]

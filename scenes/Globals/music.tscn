@@ -1,0 +1,48 @@
+[gd_scene load_steps=11 format=3 uid="uid://e4xlsuhfugwm"]
+
+[ext_resource type="Script" path="res://scenes/Globals/music.gd" id="1_553xf"]
+[ext_resource type="AudioStream" uid="uid://dvmchuvsuumsq" path="res://Music/build-up-31356.wav" id="2_kl874"]
+[ext_resource type="AudioStream" uid="uid://b771ps8uq1dy4" path="res://Music/dark-ambient-sci-fi-documentary-268026.mp3" id="3_v0yf3"]
+[ext_resource type="AudioStream" uid="uid://dnqffe851dcl3" path="res://Sounds/interface-soft-click-131438.mp3" id="3_vi6fp"]
+[ext_resource type="AudioStream" uid="uid://7q30sbcvm8xi" path="res://Music/spinning-head-271171.mp3" id="4_1bant"]
+[ext_resource type="AudioStream" uid="uid://dtpyxv2peclre" path="res://Sounds/button-2.wav" id="4_ux7o8"]
+[ext_resource type="AudioStream" uid="uid://dbejhxd45w66w" path="res://Music/sci-fi-terror-loop-262135.mp3" id="5_1x840"]
+[ext_resource type="AudioStream" uid="uid://cqlwov6atsi41" path="res://Sounds/barrel.mp3" id="7_0r58u"]
+[ext_resource type="AudioStream" uid="uid://o6gxaf7oik6v" path="res://Sounds/engine_start.wav" id="8_fyfmt"]
+[ext_resource type="AudioStream" uid="uid://cnohv51kpj8ey" path="res://Music/night-cyprus-sea-53355.mp3" id="10_8lv6b"]
+
+[node name="Music" type="Node3D"]
+script = ExtResource("1_553xf")
+
+[node name="Buildup" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_kl874")
+
+[node name="MusicMenu" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_v0yf3")
+parameters/looping = true
+
+[node name="MusicPlay" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_1bant")
+parameters/looping = true
+
+[node name="MusicBoss" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_1x840")
+
+[node name="Hover" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_vi6fp")
+
+[node name="ButtonClick" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_ux7o8")
+
+[node name="Barrel" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_0r58u")
+
+[node name="Start" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_fyfmt")
+volume_db = 3.0
+
+[node name="SeaSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_8lv6b")
+
+[connection signal="finished" from="Buildup" to="." method="_on_buildup_finished"]
+[connection signal="finished" from="MusicBoss" to="." method="_on_music_boss_finished"]

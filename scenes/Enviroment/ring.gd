@@ -8,10 +8,13 @@ func _ready():
 
 func _on_body_entered(body):
 	if body.is_in_group("Fox"):
+		Global.fox_life = Global.fox_life + 20
+		if "score_sound" in body:
+			body.score_sound()
 		queue_free()
 
-
 func _on_area_entered(area):
+
 	if area.is_in_group("Trigger"):
 			ring.visible = true
 			var tween = get_tree().create_tween()

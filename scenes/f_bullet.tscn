@@ -26,7 +26,7 @@ bottom_radius = 0.1
 height = 0.4
 radial_segments = 4
 
-[node name="FBullet" type="Area3D"]
+[node name="FBullet" type="Area3D" groups=["FBullet"]]
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_o1o7r")

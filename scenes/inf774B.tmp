@@ -1,0 +1,56 @@
+[gd_scene load_steps=6 format=3 uid="uid://bx2p6n2axoqyt"]
+
+[ext_resource type="Script" path="res://information.gd" id="1_1ndxu"]
+[ext_resource type="Texture2D" uid="uid://gsyn65kupjy8" path="res://Graphics/font/background/dialogue_backgroung.png" id="2_k3lyx"]
+[ext_resource type="AudioStream" uid="uid://xaxv0i1v5212" path="res://Sounds/click-button-131479.mp3" id="3_6rf54"]
+[ext_resource type="FontFile" uid="uid://em557tneicyg" path="res://Graphics/font/Jaro/Jaro-Regular-VariableFont_opsz.ttf" id="3_d4u0j"]
+[ext_resource type="Script" path="res://scenes/pause_calculator.gd" id="5_8jkal"]
+
+[node name="Information" type="Control"]
+custom_minimum_size = Vector2(798, 128)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 798.0
+offset_bottom = 149.0
+size_flags_horizontal = 0
+script = ExtResource("1_1ndxu")
+
+[node name="Background" type="NinePatchRect" parent="."]
+custom_minimum_size = Vector2(798, 149)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -25.0
+offset_bottom = -21.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_k3lyx")
+region_rect = Rect2(0, 0, 12, 12)
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+
+[node name="Content" type="RichTextLabel" parent="."]
+custom_minimum_size = Vector2(773, 128)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_fonts/normal_font = ExtResource("3_d4u0j")
+bbcode_enabled = true
+
+[node name="TypeTimer" type="Timer" parent="."]
+wait_time = 0.05
+
+[node name="PauseTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="VoicePlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_6rf54")
+
+[node name="PauseCalculator" type="Node" parent="."]
+script = ExtResource("5_8jkal")
+
+[connection signal="timeout" from="TypeTimer" to="." method="_on_type_timer_timeout"]
+[connection signal="timeout" from="PauseTimer" to="." method="_on_pause_timer_timeout"]

@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://bbw8rfoqq7y68"]
+
+[ext_resource type="FontFile" uid="uid://jfwom08ucja1" path="res://Graphics/font/Jaro/static/Jaro-Regular.ttf" id="1_3yiab"]
+
+[resource]
+default_font = ExtResource("1_3yiab")
+default_font_size = 50

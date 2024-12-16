@@ -1,7 +1,7 @@
 extends Area3D
 
 var rotation_speed: int = 100
-var collision_damage: int = 100
+var collision_damage: int = 50
 var rot_x
 var rot_y
 var rot_z
@@ -11,7 +11,6 @@ func _ready():
 	rot_x = rng.randf_range(0, 5.0)
 	rot_y = rng.randf_range(0, 5.0)
 	rot_z = rng.randf_range(0, 5.0)
-	
 
 func _process(delta):
 	rotation_degrees.x += rotation_speed * delta * rot_x 
@@ -21,7 +20,7 @@ func _process(delta):
 func _on_body_entered(body):
 	if body.is_in_group("Fox"):
 		if "hit" in body:
-			body.hit(100)
+			body.hit(collision_damage)
 
 func hit(dmg):
 	print(dmg)

@@ -1,8 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://cmd2yxq3pq2t3"]
+[gd_scene load_steps=14 format=3 uid="uid://cmd2yxq3pq2t3"]
 
 [ext_resource type="Script" path="res://scenes/enemy.gd" id="1_7tqbl"]
 [ext_resource type="PackedScene" uid="uid://62ru1gkggh02" path="res://Graphics/Ships/Enemy1.blend" id="1_bxwn8"]
 [ext_resource type="Shader" uid="uid://hmufp7ysukj4" path="res://scenes/Shaders/enemy_hit_flash.tres" id="3_f2y3g"]
+[ext_resource type="AudioStream" uid="uid://bthbr12eghh1q" path="res://Sounds/hit.wav" id="4_s0hmr"]
+[ext_resource type="AudioStream" uid="uid://ccu4ixpi42qbw" path="res://Sounds/explosion.wav" id="5_mayvy"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6uosy"]
 resource_local_to_scene = true
@@ -145,6 +147,12 @@ wait_time = 3.0
 
 [node name="Target" type="Marker3D" parent="Aim"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10.6514)
+
+[node name="Hit_score" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_s0hmr")
+
+[node name="Death" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_mayvy")
 
 [connection signal="timeout" from="Timer/FireTimer" to="." method="_on_fire_timer_timeout"]
 

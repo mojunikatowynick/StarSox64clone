@@ -8,6 +8,8 @@ var life = 30
 @onready var aim = $Aim
 @onready var target = $Aim/Target
 @onready var animation_player = $AnimationPlayer
+@onready var hit_score = $Hit_score
+@onready var death = $Death
 
 @export var spawn_place_relative: Vector3 = Vector3(-20, 20, 0)
 var start_pos: Vector3
@@ -17,6 +19,10 @@ var alive = false
 signal enemy_fire(pos, rot)
 
 func _ready():
+	var s_pos_x: int = randi_range(-35,35)
+	var s_pos_y: int = randi_range(-35,35)
+	var s_pos_z: float = global_position.z
+	position = Vector3(s_pos_x, s_pos_y, s_pos_z)
 	start_pos = global_position
 	connect("enemy_fire", Global.Wrold._on_enemy_enemy_fire)
 	visible = false
@@ -25,6 +31,7 @@ func _ready():
 
 func hit(dmg):
 	if alive:
+		hit_score.play()
 		animation_player.play("hit_flash")
 		life = life - dmg
 		if life < 30:
@@ -32,6 +39,10 @@ func hit(dmg):
 		if life < 20:
 			cpu_particles_3d_2.emitting = true
 		if life <= 0:
+			visible = false
+			alive = false
+			death.play()
+			await death.finished
 			queue_free()
 
 func activate_enemy():
