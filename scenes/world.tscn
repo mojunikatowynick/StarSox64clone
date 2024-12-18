@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://bhyhsvivo3vqy"]
+[gd_scene load_steps=40 format=3 uid="uid://bhyhsvivo3vqy"]
 
 [ext_resource type="Script" path="res://scenes/world.gd" id="1_y0ffe"]
 [ext_resource type="Script" path="res://scenes/enemy_rails.gd" id="4_5e84b"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://dvukf8pohr2dr" path="res://icon.svg" id="12_km5b7"]
 [ext_resource type="PackedScene" uid="uid://jmsnxtjlkfgl" path="res://scenes/fly_enemy.tscn" id="14_0ayvv"]
 [ext_resource type="PackedScene" uid="uid://cayibpbna6tui" path="res://scenes/boss.tscn" id="15_2tkmj"]
+[ext_resource type="PackedScene" uid="uid://cbupiofkpbv50" path="res://scenes/f_bullet.tscn" id="16_ve4ea"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_dqywx"]
 sky_top_color = Color(0.225408, 0.603492, 0.701855, 1)
@@ -762,6 +763,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7384.17)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10150)
 
 [node name="Boss" parent="EnemyHandler" instance=ExtResource("15_2tkmj")]
+
+[node name="load" type="Node3D" parent="."]
+
+[node name="FlyEnemy" parent="load" instance=ExtResource("14_0ayvv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.34963, 23.8755)
+
+[node name="FBullet" parent="load" instance=ExtResource("16_ve4ea")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -224.944, 46.5596)
+
+[node name="Enemy" parent="load" instance=ExtResource("9_fte75")]
 
 [connection signal="fire" from="Level1/Path3D/PathFollow3D/RailCart/Fox" to="." method="_on_fox_fire"]
 [connection signal="area_entered" from="Level1/Path3D/PathFollow3D/RailCart/Trigger/Trigger" to="." method="_on_trigger_area_entered"]

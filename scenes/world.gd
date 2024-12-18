@@ -4,6 +4,7 @@ extends Node
 #projectiles
 const F_BULLET = preload("res://scenes/f_bullet.tscn")
 const ENEM_BULLET = preload("res://scenes/enem_bullet.tscn")
+const EXPLOSION = preload("res://scenes/explosion.tscn")
 
 @onready var fox = $Level1/Path3D/PathFollow3D/RailCart/Fox
 @onready var bullets = $Bullets
@@ -20,24 +21,45 @@ const ENEM_BULLET = preload("res://scenes/enem_bullet.tscn")
 @onready var enemy4 = $Level1/Path3D/PathFollow3D/RailCart/EnemyRails/Path3D4/PathFollow3D/Enemy
 @onready var ui = $UI
 @onready var play_button = $UI/ButtonCntrl/PlayButton
+@onready var loading = $load
 
+var loading_check: int = 0
 
 var aureola_enemies
+var load_group
 
 var flying: bool = false
 var camera_pos
 var can_boost: bool = true
 
-func _ready():
-	Music.buildup.play()
 
+func loading_assets():
+	for assets in loading.get_children():
+		if "load_asset_enemy" in assets:
+			assets.load_asset_enemy()
+
+func loading_done_check():
+	loading_check = loading_check + 1
+	if loading_check >= 1:
+		if "loading_done" in ui:
+			ui.loading_done()
+
+func _ready():
+	
+	aureola_enemies = [enemy1, enemy2, enemy3, enemy4]
+	loading_assets()
+	await get_tree().create_timer(1).timeout
+	Music.buildup.play()
 	path_follow_3d.prog_speed = 0
 	camera_pos = fox_camera.global_position
 	#print(camera_pos)
 	animation_player.play("Opening_Cinematic")
-	aureola_enemies = [enemy1, enemy2, enemy3, enemy4]
 
-	
+func explosion(pos):
+	var ex_anim = EXPLOSION.instantiate() as Node3D
+	bullets.add_child(ex_anim)
+	ex_anim.global_position = pos
+
 func _on_play_button_pressed():
 	Music.buildup.stop()
 	Music.button_click.play()

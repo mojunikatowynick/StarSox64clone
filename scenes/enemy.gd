@@ -9,27 +9,40 @@ var life = 30
 @onready var target = $Aim/Target
 @onready var hit_score = $Hit_score
 @onready var death = $Death
+@onready var hit_flash_anim = $HitFlashAnim
 
 var alive = false
 
 signal enemy_fire(pos, rot)
+signal loading_done
+signal explosion(pos)
+
+func load_asset_enemy():
+	connect("loading_done", Global.Wrold.loading_done_check)
+	visible = true
+	activate_enemy()
+	cpu_particles_3d.emitting = true
+	cpu_particles_3d_2.emitting = true
+	hit_flash_anim.play("hit_flash")
+	await get_tree().create_timer(1).timeout
+	loading_done.emit()
+	queue_free()
 
 func _ready():
-	
+	connect("explosion", Global.Wrold.explosion)
 	connect("enemy_fire", Global.Wrold._on_enemy_enemy_fire)
 	visible = false
-	cpu_particles_3d.emitting = false
-	cpu_particles_3d_2.emitting = false
 
 func hit(dmg):
 	hit_score.play()
-	$HitFlashAnim.play("hit_flash")
+	hit_flash_anim.play("hit_flash")
 	life = life - dmg
 	if life < 30:
 		cpu_particles_3d.emitting = true
 	if life < 20:
 		cpu_particles_3d_2.emitting = true
 	if life <= 0:
+		explosion.emit(global_position)
 		death.play()
 		cpu_particles_3d.emitting = false
 		cpu_particles_3d_2.emitting = false

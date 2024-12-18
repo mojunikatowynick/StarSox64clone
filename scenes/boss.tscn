@@ -1313,7 +1313,7 @@ tracks/8/path = NodePath(".")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
-"times": PackedFloat32Array(5),
+"times": PackedFloat32Array(3.96667),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],

@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://bklwd82tkqhx3"]
+[gd_scene load_steps=11 format=3 uid="uid://bklwd82tkqhx3"]
 
 [ext_resource type="Script" path="res://scenes/UI/ui.gd" id="1_qdrh2"]
 [ext_resource type="PackedScene" uid="uid://bx2p6n2axoqyt" path="res://scenes/information.tscn" id="2_3gf4c"]
 [ext_resource type="Theme" uid="uid://bbw8rfoqq7y68" path="res://scenes/UI/ui.tres" id="3_8os35"]
+[ext_resource type="Texture2D" uid="uid://bnbugsn5ddyfl" path="res://Graphics/2dSprites/pngtree-loading-icon-vector-transparent-png-image_5687537.png" id="4_35hue"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mcbot"]
 bg_color = Color(0.104846, 0.106833, 0.0753907, 1)
@@ -144,6 +145,40 @@ theme = ExtResource("3_8os35")
 theme_override_styles/hover = SubResource("StyleBoxFlat_fhqj1")
 theme_override_styles/normal = SubResource("StyleBoxFlat_b13eg")
 text = "Quit game"
+
+[node name="Blackout" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Blackout"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Control" type="Control" parent="Blackout"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="loadingcircle" type="Sprite2D" parent="Blackout/Control"]
+texture = ExtResource("4_35hue")
 
 [connection signal="mouse_entered" from="ButtonCntrl/PlayButton" to="." method="_on_play_button_mouse_entered"]
 [connection signal="pressed" from="ButtonCntrl/PlayButton" to="." method="_on_play_button_pressed"]

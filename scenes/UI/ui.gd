@@ -3,6 +3,8 @@ extends CanvasLayer
 @onready var information = $Dialogue/MarginContainer/Information
 @onready var end_button = $ButtonCntrl/EndButton
 @onready var play_button = $ButtonCntrl/PlayButton
+@onready var blackout = $Blackout
+@onready var loadingcircle = $Blackout/Control/loadingcircle
 
 signal begin
 
@@ -18,7 +20,19 @@ func _ready():
 	await get_tree().create_timer(4).timeout
 	var tween = get_tree().create_tween()
 	tween.tween_property(play_button, "modulate", Color(1, 1, 1), 7)
-	
+
+
+func loading_done():
+	loadingcircle.visible = false
+	var tween = get_tree().create_tween()
+	tween.tween_property(blackout, "modulate", Color(1, 1, 1, 0), 2)
+	await tween.finished
+	blackout.visible = false
+
+func _process(delta):
+	loadingcircle.rotation += 1 * delta
+
+
 func update_fox_life():
 	progress_bar.value = Global.fox_life
 	if Global.fox_life > 100:

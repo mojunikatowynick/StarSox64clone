@@ -17,6 +17,7 @@ var life = 30
 @onready var animation_player = $AnimationPlayer
 @onready var hit_score = $Hit_score
 @onready var death = $Death
+@onready var deathtimer = $deathtimer
 
 @export var spawn_place_relative: Vector3 = Vector3(-20, 20, 0)
 var start_pos: Vector3
@@ -24,8 +25,24 @@ var start_pos: Vector3
 var alive = false
 
 signal enemy_fire(pos, rot)
+signal loading_done
+signal explosion(pos)
+
+func load_asset_enemy():
+	connect(\"loading_done\", Global.Wrold.loading_done_check)
+	visible = true
+	activate_enemy()
+	cpu_particles_3d.emitting = true
+	cpu_particles_3d_2.emitting = true
+	animation_player.play(\"hit_flash\")
+	await get_tree().create_timer(1).timeout
+	loading_done.emit()
+	queue_free()
 
 func _ready():
+	connect(\"explosion\", Global.Wrold.explosion)
+
+	visible = false
 	var s_pos_x: int = randi_range(-35,35)
 	var s_pos_y: int = randi_range(-35,35)
 	var s_pos_z: float = global_position.z
@@ -46,6 +63,7 @@ func hit(dmg):
 		if life < 20:
 			cpu_particles_3d_2.emitting = true
 		if life <= 0:
+			explosion.emit(global_position)
 			visible = false
 			alive = false
 			death.play()
@@ -53,6 +71,7 @@ func hit(dmg):
 			queue_free()
 
 func activate_enemy():
+	deathtimer.start()
 	global_position = start_pos + spawn_place_relative
 	rotation_degrees.z = -360
 	visible = true
@@ -68,6 +87,9 @@ func _on_fire_timer_timeout():
 	var fire_rotation = target.global_transform.basis
 	enemy_fire.emit(marker_3d.global_position, fire_rotation)
 	
+
+func _on_deathtimer_timeout():
+	queue_free()
 "
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r10vy"]
@@ -269,10 +291,17 @@ libraries = {
 
 [node name="Hit_score" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_jnj63")
+volume_db = -80.0
 
 [node name="Death" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_rqv4h")
+volume_db = -80.0
+
+[node name="deathtimer" type="Timer" parent="."]
+wait_time = 60.0
+one_shot = true
 
 [connection signal="timeout" from="Timer/FireTimer" to="." method="_on_fire_timer_timeout"]
+[connection signal="timeout" from="deathtimer" to="." method="_on_deathtimer_timeout"]
 
 [editable path="FlyEnemy"]
